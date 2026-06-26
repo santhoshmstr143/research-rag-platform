@@ -1,46 +1,36 @@
-from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
+
+from sentence_transformers import SentenceTransformer
 
 from extract import extract_text
 from chunk import create_chunks
 
 
-text = extract_text("text1.pdf")
+def build_vector_store():
 
-chunks = create_chunks(text)
+    text = extract_text("text1.pdf")
 
+    chunks = create_chunks(text)
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+    model = SentenceTransformer("all-MiniLM-L6-v2")
 
-embeddings = model.encode(chunks)
+    embeddings = model.encode(chunks)
 
-embeddings = np.array(embeddings).astype("float32")
+    embeddings = np.array(embeddings).astype("float32")
 
+    dimension = embeddings.shape[1]
 
-dimension = embeddings.shape[1]
+    index = faiss.IndexFlatL2(dimension)
 
-index = faiss.IndexFlatL2(dimension)
+    index.add(embeddings)
 
-index.add(embeddings)
-
-
-print("Dimension:", dimension)
-print("Vectors stored:", index.ntotal)
+    return index, model, chunks
 
 
-query = "What are the key features?"
+if __name__ == "__main__":
 
-query_embedding = model.encode([query])
+    index, model, chunks = build_vector_store()
 
-query_embedding = np.array(query_embedding).astype("float32")
-
-
-distances, indices = index.search(query_embedding, k=2)
-
-
-print("\nMost Relevant Chunks\n")
-
-for i in indices[0]:
-    print(chunks[i])
-    print("-" * 60)
+    print("Dimension:", index.d)
+    print("Vectors Stored:", index.ntotal)
