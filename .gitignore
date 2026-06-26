@@ -1,15 +1,23 @@
+# Python cache
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
 
+# Virtual environment
 venv/
 .env
 
+# IDE
 .vscode/
 .idea/
 
+# OS
 .DS_Store
 Thumbs.db
 
+# Generated files
 output/
+
+# Python packaging
+*.egg-info/
+.pytest_cache/
+.mypy_cache/

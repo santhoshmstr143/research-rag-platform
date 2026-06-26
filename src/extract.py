@@ -1,7 +1,13 @@
+from pathlib import Path
 import fitz
 
-def extract_text(pdf_path):
-    pdf = fitz.open(pdf_path)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+def extract_text(pdf_name):
+
+    pdf_path = BASE_DIR / "data" / pdf_name
+
+    pdf = fitz.open(str(pdf_path))
 
     full_text = ""
 

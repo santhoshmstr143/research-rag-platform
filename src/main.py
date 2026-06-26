@@ -5,7 +5,7 @@ from extract import extract_text
 from chunk import create_chunks
 
 
-text = extract_text("data/text1.pdf")
+text = extract_text("text1.pdf")
 
 print("Text extracted successfully")
 print("Total characters:", len(text))
@@ -35,5 +35,5 @@ with open("output/chunks.json", "w", encoding="utf-8") as f:
     json.dump(chunk_data, f, indent=4, ensure_ascii=False)
 
 
-print("Chunks saved successfully!")
+print("Chunks saved successfully")
 print("Saved to: output/chunks.json")
