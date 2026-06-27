@@ -31,6 +31,12 @@ huggingface_hub==1.21.0
 idna==3.18
 Jinja2==3.1.6
 joblib==1.5.3
+jsonpatch==1.33
+jsonpointer==3.1.1
+langchain-core==1.4.8
+langchain-protocol==0.0.18
+langchain-text-splitters==1.1.2
+langsmith==0.9.3
 markdown-it-py==4.2.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
@@ -53,6 +59,7 @@ nvidia-nccl-cu13==2.29.7
 nvidia-nvjitlink==13.0.88
 nvidia-nvshmem-cu13==3.4.5
 nvidia-nvtx==13.0.85
+orjson==3.11.9
 packaging==26.2
 proto-plus==1.28.0
 protobuf==5.29.6
@@ -68,6 +75,7 @@ python-dotenv==1.2.2
 PyYAML==6.0.3
 regex==2026.5.9
 requests==2.34.2
+requests-toolbelt==1.0.0
 rich==15.0.0
 safetensors==0.8.0
 scikit-learn==1.9.0
@@ -89,4 +97,7 @@ typing-inspection==0.4.2
 typing_extensions==4.15.0
 uritemplate==4.2.0
 urllib3==2.7.0
+uuid_utils==0.16.2
 websockets==16.0
+xxhash==3.7.1
+zstandard==0.25.0
