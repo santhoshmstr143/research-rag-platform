@@ -1,11 +1,21 @@
+import json
+import faiss
 import numpy as np
 
-from vector_store import build_vector_store
+from sentence_transformers import SentenceTransformer
+
 from prompt_builder import build_prompt
 from gemini import generate_answer
 
 
-index, model, chunks = build_vector_store()
+index = faiss.read_index("indexes/faiss_index.bin")
+
+
+with open("indexes/chunks.json", "r", encoding="utf-8") as f:
+    chunks = json.load(f)
+
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
 query = input("Enter your question: ")
