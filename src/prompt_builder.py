@@ -1,25 +1,24 @@
-def build_prompt(chunks, question):
+def build_prompt(context, question):
 
-    context = "\n\n".join(chunks)
+    context = "\n\n".join(context)
 
-    prompt = f"""
-You are a helpful research assistant.
+    return f"""
+You are an expert teaching assistant.
 
-Answer the question using ONLY the context below.
+Answer the question using ONLY the provided context.
 
-If the answer is not found in the context, reply:
+If the answer is spread across multiple chunks, combine the information into one complete answer.
 
-"I don't know based on the provided document."
+If the answer truly does not exist in the context, reply exactly:
+
+I don't know based on the provided documents.
 
 Context:
 
 {context}
 
 Question:
-
 {question}
 
 Answer:
 """
-
-    return prompt

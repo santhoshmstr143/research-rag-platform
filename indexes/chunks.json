@@ -1,7 +1,596 @@
 [
-    "Innovative Tech\nSolutions, Inc.\nProduct Launch Report:\nSmartHome Hub\nPrepared by:\nAlex Johnson\nsample-files.com\n+1-555-123-4567\nIntroduction\nThis report outlines the launch strategy for\n our new SmartHome Hub, a central devic\ne designed to connect and control all sma\nrt home devices seamlessly. Our goal is\n to revolutionize home automation\n and establish ourselves as market leaders in this \ngrowing sector.\n2\nObjectives\n1. To introduce the SmartHome Hub and its \nkey features.",
-    "growing sector.\n2\nObjectives\n1. To introduce the SmartHome Hub and its \nkey features.\n2. To present market research findings and \ncompetitor analysis.\n3. To outline our marketing strategy and \nsales projections.\n3\nKey Features\n1. Universal Compatibility: Works with all \nmajor smart home brands.\n2. AI-Powered Assistant: Learns user habits \nfor proactive home management.\n3. Enhanced Security: Military-grade \nencryption for data protection.\nMarket Analysis\nThe global smart home market is projected",
-    "encryption for data protection.\nMarket Analysis\nThe global smart home market is projected\n to reach $135.3 billion by 2025, growing at a \nCAGR of 11.6% from 2020 to 2025.\n4\nCompetitor Analysis\nCompany Market Share Key Differentiator\nSmartTech Co. 35% Wide range of \nproprietary devices\nHomeGenius 28% User-friendly interface\nConnectAll 18% Low-cost options\nOur Solution 19% Universal compatibility \n& AI integration\nMarketing Strategy\n1. Digital Marketing: Targeted social media",
-    "& AI integration\nMarketing Strategy\n1. Digital Marketing: Targeted social media \ncampaigns and influencer partnerships.\n2. Trade Shows: Showcase at CES and IFA.\n3. Retail Partnerships: In-store demos at \nmajor electronics retailers.\n5\nConclusion\nThe SmartHome Hub represents a significant\n opportunity for Innovative Tech Solutions t\no capture a substantial share of the rapid\nly growing smart home market. With \nour unique features and strategic marke\nting plan, we are well-positioned for a succe",
-    "our unique features and strategic marke\nting plan, we are well-positioned for a succe\nssful product launch. \nNext Steps\n1. Finalize production agreements with \nmanufacturers.\n2. Launch pre-order website and marketing \ncampaign.\n3. Prepare for the official launch event."
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\n  Virtualization - Process\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Renzi et al. \n• Modern Operating Systems, Tanenbaum et al.\n2\nCourse Outline \n3\nMany processes run at the same time!"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 2,
+        "text": "2\nCourse Outline \n3\nMany processes run at the same time!\n4\n• How many processes are currently running in your machine?\n5\nWhat is a Process?\n6\n• A Program is nothing but code \n• Processes are running program  \n• There can be more than one process that are created per program\nProgram\nExecutable\nRunning \nProcess\nCompile and  \nBuild\nExecute\n• Each process feels that it has its own CPU \n• Even in Single core machines - There can be multiple process that run at the \nsame time"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 3,
+        "text": "• Even in Single core machines - There can be multiple process that run at the \nsame time \n• How is CPU handling this? \nQuestion: Can you of think of how such thing can be done?\nProcess Virtualization\n7\nWith limited CPU can we create an illusion that Endless CPU’s are available? \nOS achieves this using Virtualization of the CPU\nLets think!\n8\nSome Prerequisite\n9\nCPU\n Memory\n Video \nController\n  USB \nController\nKeyboard \ncontroller\n HDD \nController\nBus"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 4,
+        "text": "9\nCPU\n Memory\n Video \nController\n  USB \nController\nKeyboard \ncontroller\n HDD \nController\nBus\nAs we go more away from CPU, the more time it takes\nSome Prerequisite - Computer Hardware\n10\n• CPU contains some registers  \n• Temporary registers  \n• Program Counter (PC), Stack pointer (SP),  Data register, address register,.. \n• Some key registers \n• Program counter - Points to the next instruction \n• Stack pointer - Points to top of the stack in the memory"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 5,
+        "text": "• Stack pointer - Points to top of the stack in the memory \n• Program Status word - Status of current state of CPU and program (condition \nbits) \nSome Prerequisites \nHow does CPU execute a program?\n• Three stage pipeline \nQuestion: Do you believe that the current hardware structure is similar to this?\n11\nFetch \nDecode\nExecute\nSome Prerequisite - Computer Hardware\n12\nFetch \nDecode\nFetch \nDecode\nHolding Buffer\nExecute\nExecute\nExecute\nSuperscalar CPU\nHow to make it at software level?\n13"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 6,
+        "text": "Decode\nHolding Buffer\nExecute\nExecute\nExecute\nSuperscalar CPU\nHow to make it at software level?\n13\n• We do need support from the hardware \n• Some mechanism to switch  \n• Eg: Each process runs for a particular time and then we switch \n• Low-level mechanism (Context Switch) \n• We also need some intelligence in the software \n• Some algorithm that can intelligently decide \n• Policies for switching \n• Basically we need - low level mechanisms and policies  (CPU Scheduler)\nWhat Constitutes a Process?"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 7,
+        "text": "What Constitutes a Process?\n14\nLets make it clear - Process is nothing but running program!! \n• The Characteristics that make up a process (State) \n• What parts of the machine are important for execution? \n• The most obvious component - Memory! Why? \n• Instructions lie in the memory, data (reads and writes) is in the memory \n• Address space is part of the process \n• What else does a running program need?\nWhat Constitutes a Process?\n15"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 8,
+        "text": "• What else does a running program need?\nWhat Constitutes a Process?\n15\n• Memory - address space (Memory that the process can address) \n• Instruction pointer, program counter - which instruction is executed \n• Stack pointer- local variables, functions and return addresses  \n• Peristent storage - I/O information \nMemory\nRegisters\nPersistent \nStorage\nInstruction \nPointer\nStack Pointer\nMachine State\nWhat Constitutes a Process?\n• Unique Identifier (Process ID) \n• Memory Image"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 9,
+        "text": "Machine State\nWhat Constitutes a Process?\n• Unique Identifier (Process ID) \n• Memory Image \n• Code and data (static) \n• Stack and Heap (Dynamic) \n• CPU Context: Registers \n• Program Counter \n• Current Operands  \n• Stack Pointer \n• File Descriptors \n• Pointers to open files and devices\n16\nCode\nData\nStack\nHeap\nMemory Image of Process\nCreation of a Process by OS\n• Load program into memory \n• Initially program resides on the \ndisk \n• OS does lazy loading \n• Allocate runtime stack"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 10,
+        "text": "• Initially program resides on the \ndisk \n• OS does lazy loading \n• Allocate runtime stack \n• Use for local variables \n• Function parameters and return \narguments\n17\nImage from OS lecture by Youjip Won\nCreation of a Process by OS\n• Creation of Program heap \n• Used for dynamically allocated data \n• malloc() and free() \n• Basic file setup \n• STDIN, OUT, ERR \n• Initialise CPU registers  \n• PC to the first instruction \n• Start the program\n18\nImage from OS lecture by Youjip Won"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 11,
+        "text": "• PC to the first instruction \n• Start the program\n18\nImage from OS lecture by Youjip Won\nStates of the Process \n• At any point process can be in one of the following states \n• Running - Its running on the processor \n• Ready - Ready to run  \n• Blocked - Not ready to run, something else is running \n• Any reason that you can think of? \n• Think of I/O call - Wait what does that mean?\n19\nStates of the Process \nProcess State Transitions\n20\nRunning \nReady \nBlocked\nDescheduled\nScheduled\nI/O Initiate"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 12,
+        "text": "Process State Transitions\n20\nRunning \nReady \nBlocked\nDescheduled\nScheduled\nI/O Initiate\nI/O done\nLets look at an Example\n21\nTime\nProcess 0\nProcess 1\nWhat’s happening\n1\nRunning\nReady\n2\nRunning\nReady\n3\nRunning\nReady\nProcess 0 initiates I/O\n4\nBlocked\nRunning\nProcess 0 is blocked, \n1 runs\n5\nBlocked\nRunning\n6\nBlocked\nRunning\nI/O of process 0 is \ndone\n7\nReady\nRunning\nProcess 1 is done\n8\nRunning\n-\nProcess 0 is done\nHow to store Metadata? - Use data structures"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 13,
+        "text": "Process 1 is done\n8\nRunning\n-\nProcess 0 is done\nHow to store Metadata? - Use data structures\n• Need for some mechanism to store the state of the process \n• Remember: OS is a software  \n• It leverages data structures to store the information \n• OS makes use of data structure called, process list \n• What to store inside each? - Process Control Block (PCB) \n• Process id? - Identification of the process \n• State of the process - ready, running or blocked"
+    },
+    {
+        "paper_id": 1,
+        "paper_name": "OSN_L02.pdf",
+        "chunk_id": 14,
+        "text": "• Process id? - Identification of the process \n• State of the process - ready, running or blocked  \n• Address space of the process - the registers \n22\nP1\nP2\nP3\n…\nProcess List\nXv6 Operating System \nTeaching OS developed by MIT - Replicate basic Unix\n23\nhttps://pdos.csail.mit.edu/6.828/2012/xv6.html\nProcess Structure in Xv6\n24\nProcess Structure in Xv6\n25\n26\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\n  Introduction and Course Overview\nhttps://karthikvaidhyanathan.com\n￼1\nWhich OS do you use?\nChromeOS\nLinux\nWindows\nOSX\n2\nWait! what is an OS anyway?\n3\nChatGPT4 Version! \nCaution: Use tools but be aware of the uncertainties they bring in!\n4\nImage generated by ChatGPT\nDevelop Whatsapp like Messaging System\n• Users authentication \n• Send and receive chats \n• Send and receive media \ncontents \n• Make audio, video calls"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 2,
+        "text": "• Send and receive chats \n• Send and receive media \ncontents \n• Make audio, video calls \n• Record audio, video \n• …..\n5\nSource: cnet.com\nAny Program for that Matter!\n• Once your app is build - Compiler comes into action (“c” -> “a.out”) to create \nthe executable (“.dmg”, “.elf”, “.exe”) \n• Executable contains: Instructions + data \n• Instructions are run by the CPU \n• CPU internally consists of registers \n• Program counter or PC \n• Operands of instructions, memory addresses\n6"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 3,
+        "text": "• Program counter or PC \n• Operands of instructions, memory addresses\n6\nWhat if there were no OS?\n• Application is a program: Processor will Fetch -> Decode -> Execute, Continue \n• CPU will have the PC which points to the instructions in the memory\n7\nHardware\nApplication\nFetch\nMemory\nDecode\nExecute\nCPU\nWhat if there were no OS?\nImage generated by ChatGPT\nOS: A Brief History\n9\nSource: https://www.orb-data.com/the-history-of-the-operating-system-from-paper-tape-to-openshift/"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 4,
+        "text": "Source: https://www.orb-data.com/the-history-of-the-operating-system-from-paper-tape-to-openshift/\nIf you are into movies, do give a watch!\n10\nSource: imdb\nForever Lasting!\nSource: xkcd.com\n11\nOperating Systems: An Overview\n• OS basically is a middleware between the \nhardware and the application/user program \n• In charge of making sure that the system \noperates correctly and efficiently \n• Does three key things: \n• Easy to execute programs \n• Manages memory \n• Handles the different I/O devices"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 5,
+        "text": "• Easy to execute programs \n• Manages memory \n• Handles the different I/O devices\n12\nHardware\nOperating System\nApplication\n13\nWhats the big deal?\n• 8.5 million devices affected! - 1% of the entire windows users \n• Airlines - Delta, KLM, Ryanair, Lufthansa,.. \n• Many passengers were stranded in airports \n• Financial organisations - London stock exchange, Visa, … \n• Healthcare - independant pharmacies and GP surgeries \n• Media, retail, train operating companies……. \nEconomic and social impact!!!"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 6,
+        "text": "• Media, retail, train operating companies……. \nEconomic and social impact!!!\n14\nAbstraction holds the key\nLets draw some parallels \n• One of the key principles in system design - Try to \nkeep things simple \n• Abstraction and decomposition - Two main \nprinciples in Software Engineering \n• Think of libraries in programming languages  \n• Provides abstraction in terms of functions \n• All you need to know is functions to be called - \nNot how they work\n15\nWhat you see as Netflix!\nSource: netflix.com"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 7,
+        "text": "Not how they work\n15\nWhat you see as Netflix!\nSource: netflix.com\nAbstraction holds the key\nLets draw some parallels \n• One of the key principles in system design - Try to keep \nthings simple \n• Abstraction and decomposition - Two main principles in \nSoftware Engineering \n• Think of libraries in programming languages  \n• Provides abstraction in terms of functions \n• All you need to know is functions to be called - Not \nhow they work \nOS can be also thought of as a black box!\n16"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 8,
+        "text": "how they work \nOS can be also thought of as a black box!\n16\nBehind the scenes!\nSource: netflix.com\nKeeping things Simple is the Key!\nDiomidis Spinellis, Paris Avgeriou, Evolution of the Unix System Architecture: An Exploratory Study, IEEE TSE, 2021 https://\nieeexplore.ieee.org/abstract/document/8704965/\n17\nWhat does an OS abstract?\nThink about the messaging system that needs to be developed\n• The messaging application runs on the CPU \n• It requires RAM to run but it feels that it has infinite"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 9,
+        "text": "• It requires RAM to run but it feels that it has infinite \nRAM  \n• There are also other application that needs to run \nsimultaneously \n• The application also needs to store data -> images, \nvideos, documents… \n• Application also have to interact with devices \n(Camera, USB,…)\n18\nThe Three Pillars of Operating Systems \n19\nVirtualization  \n(Process and Memory)\nConcurrency\nPersistance \n1.O S g i v e s e v e r y \nprocess a feeling that \nit has own CPU \n2.Every process feels"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 10,
+        "text": "1.O S g i v e s e v e r y \nprocess a feeling that \nit has own CPU \n2.Every process feels \nt h a t i t s e n o u g h \nmemory\n1.Multiple process can run at \nthe same time without \nresulting in problems \n2. OS Provides mechanisms \nt o m a k e t h e m w o r k \ntogether \n1.Disk is an I/O device. It \nneeds to be managed and \nhandled. \n2.OS handles interactions \nwith the disk and performs \nstorage management \nProcess Virtualization\n• How many CPU does your computer have?"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 11,
+        "text": "storage management \nProcess Virtualization\n• How many CPU does your computer have? \n• Is the number of process equal to the number of CPU your computer have? \n• Lets look into a simple example…\n20\nMemory Virtualization\n• Every process requires memory to run \n• How many processes are active in your system? \n• What’s the total memory they require? \n• How’s CPU managing this?\n21\nConcurrency\n• OS has to juggle between multiple processes"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 12,
+        "text": "• How’s CPU managing this?\n21\nConcurrency\n• OS has to juggle between multiple processes  \n• Heard of multi-threaded programs? But wait heard of threads? \n22\nHow many threads are active in Microsoft Word?\nSpell check in Microsoft Word\nSpell check image source: https://creativepro.com/check-spelling-dynamically/\nPersistence\n• RAM is Volatile \n• Hardware and software are needed to store data persistently \n• Hardware: I/O devices such as hard drive, SSDs, etc. \n• Software:"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 13,
+        "text": "• Hardware: I/O devices such as hard drive, SSDs, etc. \n• Software:  \n• File system manages the disk \n• File system is responsible for any files that the user creates \n• Read, writes are handled by file system which interacts with low level device \ndrivers\n23\n“Operating System” - Dual Roles\nResource Management and Hardware Abstraction \n24\nOperating\nSystem\nManaging storage\nI/O Devices\nKernel\nDevice Drivers\nUtilities\nFacilitator\nUtilities\nShare CPU\nKey Design Goals Of OS"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 14,
+        "text": "I/O Devices\nKernel\nDevice Drivers\nUtilities\nFacilitator\nUtilities\nShare CPU\nKey Design Goals Of OS\n• Abstraction: Convenience and easy to use \n• High Performance: Minimize overhead, Virtualisation should be done but \nminimise overhead \n• Reliability: OS must continously run without crashing \n• Other attributes: Energy efficiency, Security, Mobility \n• Remember: OS itself is a massively complex software (Softwares rely on OS \nto function correctly!!)\n25\nBut how does multiple systems interact?\n26"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 15,
+        "text": "to function correctly!!)\n25\nBut how does multiple systems interact?\n26\nWhatsapp Chat example\nNetwork File System\nAny Guess on this?\n27\nGrowth of ARPANET, source: Computer Networks, 5e, Tannenbaum and Weatherall\nA Map of the internet (as of 2012)\nComputer Networks: The horizontal\n28\nHardware\nOperating System\nApplication\nApplication\nOperating System\nHardware\nDevice 1 (Laptop, Mobile…)\nDevice 2 (laptop, Mobile…)\n• How can application from device 1 and 2 communicate?"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 16,
+        "text": "Device 2 (laptop, Mobile…)\n• How can application from device 1 and 2 communicate? \n• How to ensure the data/information reaches reliably? \n• What if multiple applications are running and are communicating?\nNetworks - Different Components\n• Different types of network - PAN, LAN, MAN, WAN,.. \n• Some terminologies - subnets, hosts, routers, switches, transmission lines, \ninterconnected networks (internet) not Internet \n• internet - formed when distinct networks are interconnected (network of"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 17,
+        "text": "• internet - formed when distinct networks are interconnected (network of \nnetworks)  \n• Subnets - collection of communication lines and routers owned by network \noperators \n• Protocol - Agreement between communicating parties on how the communication \nneeds to proceed\n29\nThe Different Pieces of Networks\n• As more and more networks started joining ARPANET, need for common protocol arise  \n• Invention of TCP/IP model \n• Implementing TCP/IP on different platforms was encouraged"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 18,
+        "text": "• Invention of TCP/IP model \n• Implementing TCP/IP on different platforms was encouraged  \n• Sockets - 4.2BSD Release of Berkeley Unix \n• Using networks with sockets proved effective and efficient  \n• As scale increased, difficult to remember the address of the system  \n• Domain Name System (DNS) \n• How to find route from one point to another?\n30\nLot is happening….\n31\nProprietary\nOpen Source\nFramework for AI Agents\nSource: Andrej Karpathy talk on LLMs\nRemember…\n32"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 19,
+        "text": "Proprietary\nOpen Source\nFramework for AI Agents\nSource: Andrej Karpathy talk on LLMs\nRemember…\n32\n• Understanding OS and Networks at fundamental level is very important \n• Good system design and development becomes a natural consequence \n• Provides solid foundation for understanding higher abstractions or to abstract!\nSource: Google images\nCourse Outline \n33\nGrade Distribution\n34\nComponent\nWeightage\nFinal Exam\n30%\nMid-term Exam\n15%\nQuiz\n15%\nMini projects\n20%\nIn-class activities/Bonus\n5%\nProject"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 20,
+        "text": "Final Exam\n30%\nMid-term Exam\n15%\nQuiz\n15%\nMini projects\n20%\nIn-class activities/Bonus\n5%\nProject\n20%\nNote: The instructor reserves the right to make any changes based on the course progress\nCourse Logistics \n• Course announcements and management - Moodle \n• Assignments and projects - Github Classroom \n• All resources, information and materials  - https://karthikv1392.github.io/\ncs3301_osn/ \n• The complete course schedule is already posted (minor changes may happen!)"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 21,
+        "text": "cs3301_osn/ \n• The complete course schedule is already posted (minor changes may happen!) \n• Instructor office hours - Tuesday and Thursday (5:30 to 6:00 PM) \n• Lets keep the classes lively and interactive! \n• Feedbacks are always welcome!\n35\nOSN Continuous Q&A\nCourse Logistics \nMaterials \n• The OS book is available as e-copy: https://pages.cs.wisc.edu/~remzi/OSTEP/ \n• Very important to read the book + the slides + website posts + being attentive!!\n36\nCourse Logistics \nSome Ground Rules"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 22,
+        "text": "36\nCourse Logistics \nSome Ground Rules\n• Zero Tolerance on Plagiarism! \n• Every submission will go through different checks \n• If found, the points will be 0 and may result in an F \ngrade \n• Check the institute policy on Academic misconduct \n• You may use AI tools but use them wisely! - Check \ncourse policy page \n• Try to understand rather than blindly using \ngenerated code! \n• Please respect the class timings!\n37\nImage Source: Florida Tech News\nCourse Logistics \nCommunication and Engagement"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 23,
+        "text": "37\nImage Source: Florida Tech News\nCourse Logistics \nCommunication and Engagement\n• We have planned many ways to make this a very engaging course \n• Take part in tutorial sessions: Not just for projects but for more understanding - Bonus \nquestions during the exam from tutorials \n• Instructor office hours are available - Walk into office for any queries!  \n• For every 20-25 students - A dedicated TA will be allocated \n• TA Office hours - Pleaser do use them but kindly respect the timings!"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 24,
+        "text": "• TA Office hours - Pleaser do use them but kindly respect the timings!  \n• Remember TAs are also students and they have their own commitments \n• Document will be shared for posting questions \n• Check the questions before you post one! \n• Add questions to the respective category\n38\nOSN Continuous  \nQ&A\nCourse Logistics \nProjects\n• There will be a mini project 0 (Warmup) and two other mini projects each about a \nmonth duration"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 25,
+        "text": "• There will be a mini project 0 (Warmup) and two other mini projects each about a \nmonth duration \n• All the mini projects will be graded, there will be viva as well (total 20%) \n• Final course project (20%) - Team of 2 \n• No extensions will be granted unless there is any emergency (get approval): \n• Use extra days and soft deadlines \n• Any submission over the hard deadline will not be considered and will be \nevaluated with 0\n39\nMeet the Team!\n40\nSpecial Mention: \nPrevious year(s) TAs\n41"
+    },
+    {
+        "paper_id": 2,
+        "paper_name": "OSN_L01.pdf",
+        "chunk_id": 26,
+        "text": "evaluated with 0\n39\nMeet the Team!\n40\nSpecial Mention: \nPrevious year(s) TAs\n41\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\nProcess Virtualisation - API and Mechanisms\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Remzi et al. \n• Modern Operating Systems, Tanenbaum et al."
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 2,
+        "text": "• OSTEP Book by Remzi et al. \n• Modern Operating Systems, Tanenbaum et al.\n• Other online sources which are duly cited\n2\nWhat features should the OS Provide?\nConsider that we should be able to run multiple processes!\n• Create a process \n• Double click and something just \nruns \n• Destroy a process \n• Force quit, task manager -> end \nprocess \n• Wait  \n• Wait before running \n3\n• Suspend \n• Keep the process in pause and \nresume (eg: Debugging an \napplication!) \n• Status"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 3,
+        "text": "3\n• Suspend \n• Keep the process in pause and \nresume (eg: Debugging an \napplication!) \n• Status  \n• Can we get some status of the \nprocess (task manager, system \nmonitor, top)\nHow to make it happen? - Heard of APIs?\n• Application Programming Interface - What’s that? \n• How does a travel website get information \nabout different flights and allows booking?  \n• What about payment services?\n4\n• API allows different programs/applications to \ncommunicate with each other"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 4,
+        "text": "4\n• API allows different programs/applications to \ncommunicate with each other \n• Provides a software interface for accomplishment \n• Comes with detailed documentation\nImage source: verge\nDoes OS Provide API? - System Calls!\n• Way for user program to interact with the \nOS \n• OS provides some functions that can be \nleveraged by user programs \n• Available in the form of “System calls” \n• Function call into OS code that runs at a \nhigher privilege level \n• Think about access to hardware"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 5,
+        "text": "higher privilege level \n• Think about access to hardware \n• What if user wants to execute a process? \n5\nUser Program\nOS\nHardware\nProcess \nMgmt\nFile  \nMgmt\nDevice  \nMgmt\nMemory \nMgmt\nI/O \nMgmt\nCommun \nMgmt\nBut you need Privileges!\n6\n• What if a user gives a instruction to delete all files? \n• Should all the instructions be considered with equal \npriority? \n• When does the role of OS come in to the main picture? \n• Think about reading a file or writing a file - How to \nachieve it in C?"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 6,
+        "text": "• Think about reading a file or writing a file - How to \nachieve it in C? \n• What if you just wanted to multiply two numbers? \n• What about the command to get list of available \ndirectories? \n• Two modes of execution - User mode and Kernel mode\nSource: reddit\nFor Each OS = Rewrite Programs?\n• POSIX API (Portable Operating Systems Interface) \n• Standard set of System calls that an OS must implement \n• Most modern OS’s are POSIX compliant \n• Ensures portability"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 7,
+        "text": "• Most modern OS’s are POSIX compliant \n• Ensures portability \n• Programming language libraries abstract systems calls \n• printf() in C internally invokes write system call \n• User programs usually do not worry about system calls\n7\nSome System Calls\n8\nFile Management\nProcess Management\nCommunication\nfd =open(file,..)\nclose(fd)\nwrite(fd, …)\nfork()\nwait()\nexec()\nPipe()\nShmget()\nMmap()\n…\n…\n…\nProtection\nchmod()\nUnmask()\nchown()\n…\nSystem Calls for Process (Unix)\n9\nSystem Call\nSupports \nfork()"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 8,
+        "text": "chmod()\nUnmask()\nchown()\n…\nSystem Calls for Process (Unix)\n9\nSystem Call\nSupports \nfork()\nCreates a new child process\nexec()\nMakes a process execute (runs an executable)\nwait()\nCauses a parent to block until child terminates\nexit()\nTerminates a process\n• Many variants of the above calls exist \n•  init process is the ancestor of all processes \nThe Fork System Call\n• A new process is created  \n• Parent process image copy is made \n• The new process is added to the list of processes and scheduled"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 9,
+        "text": "• The new process is added to the list of processes and scheduled \n• Parent and child start execution just after fork (with different return values) \n• Parent and child execute and modify memory independently\n10\nThe Wait API\n• Wait() call blocks in parent until child terminates (options like waitpid() exists) \n• Wait() also collects exit status of the terminated child process \n• Provides some visibility to the parent process \n• Without wait, if process terminates - Zombie process"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 10,
+        "text": "• Without wait, if process terminates - Zombie process \n• Exit status not collected by the parent \n• Wait allows OS to reclaim the resources of the child - Prevent zombies \n• What if Parent terminates before the child? - Think!\n11\nRemember: Init process, adopts orphans and reaps them\nThe Exec API\n• When we perform a fork(), the parent and child execute the same code \n• Do you see some problem there?\n12\n• exec() comes to the rescue \n• Load a different executable to the memory"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 11,
+        "text": "12\n• exec() comes to the rescue \n• Load a different executable to the memory \n• Essence: Child can run a different program from parent \n• The process ID of the process will remain the same \n• In some variants of exec(), command lines to the executables can be passed!\nIllustrative Flow\n13\nHow does the Shell work? - Ever thought?\n• Init process is started upon hardware \ninitialisation \n• The init process spawns a shell like bash \n• Shell does the following \n• Read user command"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 12,
+        "text": "• The init process spawns a shell like bash \n• Shell does the following \n• Read user command \n• Forks a child and exec the command \n• Wait for it to finish -> next command\n14\nCan you think how this works?\n• > wc process_sample3.c > output.txt\n15\n• Shell will fork a child  \n• Rewires its standard output to text file (output.txt) \n• Calls exec on the child (wc process_sample.c) \n• The output will be redirected to output.txt \n• Have you seen Unix pipes “|”"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 13,
+        "text": "• The output will be redirected to output.txt \n• Have you seen Unix pipes “|”  \n• Output of one goes as input to the other  \nNote: fork(), exec() and wait() are required  \nThe Big Question - How to run multiple Processes?\n16\nTwo Major Problems to be Solved\n17\nProcess Virtualisation \nChallenges\nHow to ensure process does \nnot do something not \nexpected?\nHow to stop process in \nbetween and switch to \nanother one?\nWhat if we allow process to do whatever it wants?\nHow can multiple processes run?\n18"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 14,
+        "text": "another one?\nWhat if we allow process to do whatever it wants?\nHow can multiple processes run?\n18\n• Hardware Support \n• Have some low level mechanisms to switch process \n• What are the challenges? \n• Performance Overhead? \n• Software support \n• Have some policies which decides what needs to be executed  \n• What are some of the challenges? \n• Control overhead?\nNormal Function call\n• Function call translates to a jump instruction \n• One instruction to another instruction"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 15,
+        "text": "• Function call translates to a jump instruction \n• One instruction to another instruction \n• A new stack frame is pushed to the stack, \nStack pointer is updated \n• Old value of program counter (return value) \npushed to stack and PC is updated \n• Stack frame contains return value, function \narguments, etc,\n19\nnew_function()\nVoid new_function() \n{……}\nStack\nOld PC \nArgs\nPC\n1\n2\nSP\nIs this enough?\n20\nOS\nProgram\n1.\nCreate an entry in process list \n2.\nAllocate memory for the program \n3."
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 16,
+        "text": "20\nOS\nProgram\n1.\nCreate an entry in process list \n2.\nAllocate memory for the program \n3.\nLoad program into memory \n4.\nSetup stack with argc/argv \n5.\nClear registers \n6.\nExecute call main() \n7. Run main () \n8. Execute return from main() \n9. Free memory of process \n10. Remove process from process list\nWhat if?\n• The process wants to perform operations such as: \n• Issuing I/O request to disk \n• Access to memory or other system resources \n• Can we let the process do whatever it wants?"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 17,
+        "text": "• Access to memory or other system resources \n• Can we let the process do whatever it wants? \nIdea: Can we think of limiting the access of a process?\n21\nChallenge 1: Prevent Unintentional behaviour\nLimit Direct Execution\n22\nhttps://tribuneindia.com\nOnly Kernel has access\nUser program can go until this point\nLets draw some Parallels\n23\n• As a visitor/user in the library - check sections, read books, magazines,.. \n• What about accessing the reference section and get access to some"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 18,
+        "text": "• What about accessing the reference section and get access to some \ntreasured books?\nLets draw some Parallels\n24\nLets draw some Parallels\n25\nLets draw some Parallels\n26\nRestricted Operations\n• Bring hardware into the picture \n• Introduce a new processor mode \n• User mode \n• Code is restricted in what it can do \n• Eg: no I/O request, Processor will raise an exception \n• Kernel mode \n• Code can do whatever it likes to do \n• All privileged operations can be executed\n27"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 19,
+        "text": "• Code can do whatever it likes to do \n• All privileged operations can be executed\n27\nAny challenges that you can think of?\nLimited Direct Execution (LDE)\n• Low level mechanism that separates the user space from kernel space \n• Let the program directly run on the CPU \n• Limits what process can do \n• Offer privileged operations through well defined channels with the help of OS \nAt the end we need OS to be more than just a library!\n28\nHow to move from User to Kernel?"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 20,
+        "text": "At the end we need OS to be more than just a library!\n28\nHow to move from User to Kernel?\n• System calls - Kernel performs on behalf of user process  \n• Key pieces of functionality exposed by the kernel \n• File system, process management, process communication, memory \nallocation, etc \n• Most OS provides few 100s of calls \n• Early unix - 20 calls \n• Some privileged hardware instruction support is needed - Cannot use normal \nfunction call mechanism\n29\nSystem call works little differently"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 21,
+        "text": "function call mechanism\n29\nSystem call works little differently\n• Kernel does not trust the user stack - You don’t want to jump to random addresses \n• Maintains a separate kernel stack (kernel mode) \n• Kernel cannot rely on user provided address \n• Uses a table - Interrupt Descriptor table (boot time) - Guidelines in our example \n• IDT consists of addresses of different kernel functions to run on system calls or \nother events\n30\nTRAP Instruction"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 22,
+        "text": "other events\n30\nTRAP Instruction\n• Special kind of instruction to switch mode from user to kernel  \n• Allows system to perform what it wants  \n• When a system call is made, the trap instruction allows to jump into kernel \n• Raise the privilege mode to kernel mode \n• Return-from-trap instruction allows switch back to user mode \n• Return into the calling user program \n• Normal routine is interrupted \n31\nMore about TRAP instruction\n• During TRAP instruction execution"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 23,
+        "text": "31\nMore about TRAP instruction\n• During TRAP instruction execution \n• CPU to higher privilege level \n• Switch to Kernel Stack \n• Save context (old PC, registers) on Kernel Stack \n• Look up in IDT (Trap Table) and jump to trap handler function in OS code  \n• Once in Kernel, privileged instructions can be performed  \n• Once done, OS calls a special return-from-trap instruction \n• Returns into calling program, with back to User mode\n32\nThe dual modes\nUser Mode and Kernel Mode\n33"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 24,
+        "text": "32\nThe dual modes\nUser Mode and Kernel Mode\n33\nAdapted from: OS02-Limited Direct Execution, Dongkun Shin, SKKU \nThe Dual Modes\n34\nAdapted from: OS02-Limited Direct Execution, Dongkun Shin, SKKU \n• Interrupt \n• Signal sent to the CPU due to unexpected event \n• I/O Interrupt, clock Interrupt, Console Interrupt \n• From either Software or Hardware interrupt \n• Hardware may trigger an interrupt by signalling to the CPU \n• Trap \n• Software generated interrupt caused by"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 25,
+        "text": "• Trap \n• Software generated interrupt caused by \n• Exception: Error from running program (divide by Zero) \n• System call: Invoked by user program \nInterrupt and Trap\n35\nLDE Protocol\n36\nOS @ boot (Kernel mode)\nHardware\nInitialize trap table\nRemember address of.. \nSyscall handler.. \nOS @ run (Kernel mode)\nHardware\nProgram (User mode)\nCreate entry for process list \nAllocate memory for program \nLoad program into memory \nSetup user stack with arg \nFill kernel stack with reg/PC"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 26,
+        "text": "Load program into memory \nSetup user stack with arg \nFill kernel stack with reg/PC \nRestore regs from kernel stack \nMove to user mode \nJump to main\nRun main() \n.. \nSystem call  \ntrap into OS\nLDE Protocol\n37\nOS @ boot (Kernel mode)\nHardware\nProgram (User mode)\n…. \nSave regs to kernel stack \nMove to kernel mode \nJump to trap handler\nHandle trap \nExecute the system call \nReturn-from-trap\nRestore regs from kernel stack \nMove to user mode \nJump to PC after trap\n… \nReturn from main()"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 27,
+        "text": "Restore regs from kernel stack \nMove to user mode \nJump to PC after trap\n… \nReturn from main() \ntrap (via exit())\nFree memory of process \nRemove process from process list\nProblem 2: How to Switch between Process?\nLets draw some parallels\nHow can this situation be handled? - What can be the possibilities?\n38\nCooperative Approach \nNon-Preemptive \n• Wait for system calls  \n• OS trusts the processes to behave reasonably (Give control back - Yield() call)"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 28,
+        "text": "• OS trusts the processes to behave reasonably (Give control back - Yield() call) \n• Process transfer the control to the CPU by making a system call \n• There can be misbehaving process (They may try to do something they shouldn’t) \n• Divide by zero or attempting to access memory it shouldn’t \n• Trap to OS -> OS will terminate the process \n• Used in initial versions of Mac OS, Old Xerox alto system \n• What if there is an infinite loop & process never terminates?  - Reboot\n39"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 29,
+        "text": "• What if there is an infinite loop & process never terminates?  - Reboot\n39\nNon-Cooperative Approach\nPreemptive\n• OS takes control  \n• The only way in cooperative approach to take control is reboot \n• Without Hardware support, OS can’t do much! \n• How can OS gain control?\n40\n• Simple solution - Use interrupts \n• Timer interrupt was invented many years ago \n• Every X milliseconds, raise an interrupt -> halt the process -> invoke interrupt \nhandler -> OS regains control\nNon-Cooperative Approach"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 30,
+        "text": "handler -> OS regains control\nNon-Cooperative Approach\nPreemptive - Timer Interrupt\n• During boot sequence, OS starts the timer \n• The time raises an interrupt every “X” milliseconds \n• The timer interrupt gives OS the ability to run again on CPU \n• Two decisions are possible - Component called Scheduler comes into picture \n• Continue with current process after handling interrupt \n• Switch to a different process => OS executes Context Switch\n41\nContext Switch"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 31,
+        "text": "• Switch to a different process => OS executes Context Switch\n41\nContext Switch\n• A low-level piece of assembly code \n• Save a few register values from executing \nprocess registers to kernel stack \n• General purpose registers \n• Program counter \n• Kernel stack pointer \n• Restore values for the next process \n• essentially return-from-trap will go to new \nprocess \n• Switch to Kernel stack for the next process\n42\n43\nOS @ boot (Kernel mode)\nHardware\nInitialise trap table\nRemember address of.."
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 32,
+        "text": "42\n43\nOS @ boot (Kernel mode)\nHardware\nInitialise trap table\nRemember address of.. \nSyscall handler..  \nTimer handler\nStart interrupt timer\nStart timer \nInterrupt CPU every “X” milliseconds\nOS @ run (Kernel mode)\nHardware\nProgram (User mode)\nProcess A \n….\nTimer interrupt \nSave regs(A) to k-stack(A) \nMove to kernel mode \nJump to trap handler \nLDE Protocol (Timer Interrupt)\n44\nLDE Protocol (Timer Interrupt)\nOS @ boot (Kernel mode)\nHardware\nProgram (User mode)\nHandle the trap"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 33,
+        "text": "OS @ boot (Kernel mode)\nHardware\nProgram (User mode)\nHandle the trap \nCall switch() routine \nSave regs(A) to proc-struct(A) \nRestore regs(B) from proc-struct(B) \nSwitch to k-stack(B) \nReturn-from-trap (into B)\n….. \nRestore regs(B) from k-stack(B) \nMove to user mode \nJump to B’s PC\nProcess B \n…\nWhat if?\n• During handling of one interrupt another interrupt occurs? \n• Disable interrupt during interrupt processing \n• Sophisticated locking mechanism to protect concurrent access to internal"
+    },
+    {
+        "paper_id": 3,
+        "paper_name": "OSN_L03.pdf",
+        "chunk_id": 34,
+        "text": "• Sophisticated locking mechanism to protect concurrent access to internal \ndata structures \n45\nHow to decide which process to run next?\n46\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\nProcess Virtualisation - Mechanisms and Policies (Part 1)\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Remzi et al. \n• Modern Operating Systems, Tanenbaum et al."
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 2,
+        "text": "• OSTEP Book by Remzi et al. \n• Modern Operating Systems, Tanenbaum et al.\n• Other online sources which are duly cited\n2\nLets draw some Parallels\n3\n• As a visitor/user in the library - check sections, read books, magazines,.. \n• What about accessing the reference section and get access to some \ntreasured books?\nLets draw some Parallels\n4\nLets draw some Parallels\n5\nLets draw some Parallels\n6\nTRAP Instruction\n• Special kind of instruction to switch mode from user to kernel"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 3,
+        "text": "6\nTRAP Instruction\n• Special kind of instruction to switch mode from user to kernel  \n• Allows system to perform what it wants  \n• When a system call is made, the trap instruction allows to jump into kernel \n• Raise the privilege mode to kernel mode \n• Return-from-trap instruction allows switch back to user mode \n• Return into the calling user program \n• Normal routine is interrupted \n7\nMore about TRAP instruction\n• During TRAP instruction execution \n• CPU to higher privilege level"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 4,
+        "text": "7\nMore about TRAP instruction\n• During TRAP instruction execution \n• CPU to higher privilege level \n• Switch to Kernel Stack \n• Save context (old PC, registers) on Kernel Stack \n• Look up in IDT (Trap Table) and jump to trap handler function in OS code  \n• Once in Kernel, privileged instructions can be performed  \n• Once done, OS calls a special return-from-trap instruction \n• Returns into calling program, with back to User mode\n8\nThe dual modes\nUser Mode and Kernel Mode\n9"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 5,
+        "text": "• Returns into calling program, with back to User mode\n8\nThe dual modes\nUser Mode and Kernel Mode\n9\nAdapted from: OS02-Limited Direct Execution, Dongkun Shin, SKKU \nThe Dual Modes\n10\nAdapted from: OS02-Limited Direct Execution, Dongkun Shin, SKKU \n• Interrupt \n• Signal sent to the CPU due to unexpected event \n• I/O Interrupt, clock Interrupt, Console Interrupt \n• From either Software or Hardware interrupt \n• Hardware may trigger an interrupt by signalling to the CPU \n• Trap"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 6,
+        "text": "• Hardware may trigger an interrupt by signalling to the CPU \n• Trap \n• Software generated interrupt caused by \n• Exception: Error from running program (divide by Zero) \n• System call: Invoked by user program \nInterrupt and Trap\n11\nLDE Protocol\n12\nOS @ boot (Kernel mode)\nHardware\nInitialize trap table\nRemember address of.. \nSyscall handler.. \nOS @ run (Kernel mode)\nHardware\nProgram (User mode)\nCreate entry for process list \nAllocate memory for program \nLoad program into memory"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 7,
+        "text": "Create entry for process list \nAllocate memory for program \nLoad program into memory \nSetup user stack with arg \nFill kernel stack with reg/PC \nRestore regs from kernel stack \nMove to user mode \nJump to main\nRun main() \n.. \nSystem call  \ntrap into OS\nLDE Protocol\n13\nOS @ boot (Kernel mode)\nHardware\nProgram (User mode)\n…. \nSave regs to kernel stack \nMove to kernel mode \nJump to trap handler\nHandle trap \nExecute the system call \nReturn-from-trap\nRestore regs from kernel stack \nMove to user mode"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 8,
+        "text": "Execute the system call \nReturn-from-trap\nRestore regs from kernel stack \nMove to user mode \nJump to PC after trap\n… \nReturn from main() \ntrap (via exit())\nFree memory of process \nRemove process from process list\nProblem 2: How to Switch between Process?\nLets draw some parallels\nHow can this situation be handled? - What can be the possibilities?\n14\nCooperative Approach \nNon-Preemptive \n• Wait for system calls  \n• OS trusts the processes to behave reasonably (Give control back - Yield() call)"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 9,
+        "text": "• OS trusts the processes to behave reasonably (Give control back - Yield() call) \n• Process transfer the control to the CPU by making a system call \n• There can be misbehaving process (They may try to do something they shouldn’t) \n• Divide by zero or attempting to access memory it shouldn’t \n• Trap to OS -> OS will terminate the process \n• Used in initial versions of Mac OS, Old Xerox alto system \n• What if there is an infinite loop & process never terminates?  - Reboot\n15"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 10,
+        "text": "• What if there is an infinite loop & process never terminates?  - Reboot\n15\nNon-Cooperative Approach\nPreemptive\n• OS takes control  \n• The only way in cooperative approach to take control is reboot \n• Without Hardware support, OS can’t do much! \n• How can OS gain control?\n16\n• Simple solution - Use interrupts \n• Timer interrupt was invented many years ago \n• Every X milliseconds, raise an interrupt -> halt the process -> invoke interrupt \nhandler -> OS regains control\nNon-Cooperative Approach"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 11,
+        "text": "handler -> OS regains control\nNon-Cooperative Approach\nPreemptive - Timer Interrupt\n• During boot sequence, OS starts the timer \n• The time raises an interrupt every “X” milliseconds \n• The timer interrupt gives OS the ability to run again on CPU \n• Two decisions are possible - Component called Scheduler comes into picture \n• Continue with current process after handling interrupt \n• Switch to a different process => OS executes Context Switch\n17\nContext Switch"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 12,
+        "text": "• Switch to a different process => OS executes Context Switch\n17\nContext Switch\n• A low-level piece of assembly code \n• Save a few register values from executing \nprocess registers to kernel stack \n• General purpose registers \n• Program counter \n• Kernel stack pointer \n• Restore values for the next process \n• essentially return-from-trap will go to new \nprocess \n• Switch to Kernel stack for the next process\n18\n19\nOS @ boot (Kernel mode)\nHardware\nInitialise trap table\nRemember address of.."
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 13,
+        "text": "18\n19\nOS @ boot (Kernel mode)\nHardware\nInitialise trap table\nRemember address of.. \nSyscall handler..  \nTimer handler\nStart interrupt timer\nStart timer \nInterrupt CPU every “X” milliseconds\nOS @ run (Kernel mode)\nHardware\nProgram (User mode)\nProcess A \n….\nTimer interrupt \nSave regs(A) to k-stack(A) \nMove to kernel mode \nJump to trap handler \nLDE Protocol (Timer Interrupt)\n20\nLDE Protocol (Timer Interrupt)\nOS @ boot (Kernel mode)\nHardware\nProgram (User mode)\nHandle the trap"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 14,
+        "text": "OS @ boot (Kernel mode)\nHardware\nProgram (User mode)\nHandle the trap \nCall switch() routine \nSave regs(A) to proc-struct(A) \nRestore regs(B) from proc-struct(B) \nSwitch to k-stack(B) \nReturn-from-trap (into B)\n….. \nRestore regs(B) from k-stack(B) \nMove to user mode \nJump to B’s PC\nProcess B \n…\nWhat if?\n• During handling of one interrupt another interrupt occurs? \n• Disable interrupt during interrupt processing \n• Sophisticated locking mechanism to protect concurrent access to internal"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 15,
+        "text": "• Sophisticated locking mechanism to protect concurrent access to internal \ndata structures \n21\nHow to decide which process to run next?\nNeed for Policies (Scheduling)\nWhich process to schedule next on context switch?\n22\nScheduler\nScheduling in the Library Scenario\nWhat we need to know to ensure good policy?\n• How many users want to go to the reference section? \n• What’s the purpose? - What type of book they want to read? \n• How much time are they expected to be in the reference section?"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 16,
+        "text": "• How much time are they expected to be in the reference section? \n• How frequently are new users coming in? \nEssentially it would be good to have these estimates to make a good policy!\n23\nWhat does it mean Concretely?\n• For scheduling we need an idea of workload \n• Assumptions about processes running in the system \n• Number of processes  \n• RAM required \n• CPU utilisation \n• Any Input/Output, if yes what kind? \n• ….\n24\nLets start with some workload assumptions"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 17,
+        "text": "• Any Input/Output, if yes what kind? \n• ….\n24\nLets start with some workload assumptions\nEach process that is ready/needs to be executed and those executing - Job!  \nSome Assumptions: \n1. Each job runs for same amount of time \n2. All jobs arrive at the same time \n3. All jobs only use the CPU (No I/O) \n4. The run time or execution time of each job is known\n25\nHow good is the policy?\nSome Key Scheduling Metrics\n• Metric is something we used to measure \n• Performance metric: Turnaround time"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 18,
+        "text": "• Metric is something we used to measure \n• Performance metric: Turnaround time \n• Time difference between job completion time and the arrival time \n \n• Another metric is fairness -  Jains fairness index: How fair is the scheduling? \n• May not go hand in hand with performance\nTturnaround = Tcompletion −Tarrival\n26\nScenario 1\nAll Assumptions in tact\n• Imagine three jobs - Whatsapp, Skype and Teams update arriving at same \ntime \n• Each of them take same time to complete\n27\nProcess\nArrival"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 19,
+        "text": "time \n• Each of them take same time to complete\n27\nProcess\nArrival\nTime to Complete\nWhatsapp (w)\n~0\n20\nSkype (S)\n~0\n20\nTeams (T)\n~0\n20\nHow to go about this?\nFirst Come First Serve Policy\n• The most basic algorithm a scheduler can implement \n•  Whoever comes first, give them the access \n• Assume that they arrive at the same time - At time = 0 \n• For sake of simplicity W just arrived before T which just arrived before S\n28\nFirst Come First Serve (FCFS) Policy\n29\nAvg(Tturnaround) = 20 + 40 + 60\n3"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 20,
+        "text": "28\nFirst Come First Serve (FCFS) Policy\n29\nAvg(Tturnaround) = 20 + 40 + 60\n3\n= 40\n• Policy: Schedule the job came first \n• As soon as it is done, schedule the \njob that came next, continue \n• There is an assumption here that \neach job runs for the same time \n• What if that’s not the case? \n• Let us relax this assumption\nWhat if each job no longer runs for same time?\nRelaxing assumption 2\n30\nAvg(Tturnaround) = 100 + 120 + 140\n3\n= 120\nFCFS is not that great\nConvoy Effect\n31"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 21,
+        "text": "30\nAvg(Tturnaround) = 100 + 120 + 140\n3\n= 120\nFCFS is not that great\nConvoy Effect\n31\n• Waiting time can go very high \n• Convoy effect! \n• Think about waiting in single line in grocery store where \nyou just have one item to purchase\nWhat if?\n• Every one said that they will need this much time for accessing the reference \nsection \n• Librarian schedules based on the time they say\n32\nShortest Job First (SJF) Policy\n• Idea originating from operations research \n• Policy: Run the shortest job first"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 22,
+        "text": "• Idea originating from operations research \n• Policy: Run the shortest job first \n33\nProcess\nArrival\nTime to Complete\nW\n0\n100\nS\n0\n20\nT\n0\n20\nHow to go about this?\nShortest Job First (SJF) Policy\n34\n• Assume that all jobs came at the same time \n• Clearly whatsapp takes most amount of time\nAvg(Tturnaround) = 20 + 40 + 140\n3\n= 66.3\nIs that a bit too unrealistic? - In reality jobs can arrive at any time\nShortest Job First (SJF) Policy\n35\n• Whatsapp job arrives first \n• Teams and Skype jobs arrives"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 23,
+        "text": "Shortest Job First (SJF) Policy\n35\n• Whatsapp job arrives first \n• Teams and Skype jobs arrives \naround t = 20 \nAvg(Tturnaround) = 100 + 100 + 120\n3\n= 106.6\nEven worst!! How to improve?\nShortest Time to Completion First (STCF)\n• Adding preemption to Shortest Job First (SJF) Policy  \n• More like preemptive SJF \n• Policy: Any time a new job enters the system, \n• Check how much time is remaining for existing jobs \n• Check the time that is required for the new one"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 24,
+        "text": "• Check the time that is required for the new one \n• Execute the one that shall complete first\n36\nShortest Time to Completion First (STCF)\n37\nAvg(Tturnaround) = (140 −0) + (40 −20) + (60 −20)\n3\n= 66.3\nCan we improve this a bit more?\n• What about the user side? \n• What if this is an interactive process? \n• Think about going to Amazon or Working with some desktop application \n• Imagine a user sitting in front of the machine and executing the \ncommand"
+    },
+    {
+        "paper_id": 4,
+        "paper_name": "OSN_L04.pdf",
+        "chunk_id": 25,
+        "text": "• Imagine a user sitting in front of the machine and executing the \ncommand \n• The machine identifies the nature of the job and schedules it \n• What about response time?\n38\nTresponse = Tfirstrun −Tarrival\n39\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    }
 ]
