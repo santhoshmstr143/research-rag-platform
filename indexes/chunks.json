@@ -868,5 +868,293 @@
         "paper_name": "OSN_L05.pdf",
         "chunk_id": 23,
         "text": "How can they communicate?\n36\nHow does message/data from P1 in System 1 reach P1 in System 2?\nWhat is the role of the OS in this and how does it contribute to the effectiveness?\n37\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\nNetworking - Introduction (Sockets and Networking Layers)\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• Computer Networks, 6e by Tanebaum, Teamster and Wetherall\n• Computer Networks: A Top Down Approach by Kurose and Ross"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 2,
+        "text": "• Computer Networks: A Top Down Approach by Kurose and Ross\n• Computer Networking essentials, Youtube Channel\n• Other online sources which are duly cited\n2\nWhat about processes in different machines?\nHow can they communicate?\n3\nHow does message/data from P1 in System 1 reach P1 in System 2?\nWhat is the role of the OS in this and how does it contribute to the effectiveness?\nLet us expand it \n4\n• Between the process and network there needs to be an interface"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 3,
+        "text": "Let us expand it \n4\n• Between the process and network there needs to be an interface \n• Between the network components there needs to be some interface\nNetwork Components \nHost\n• Any device that send or receive traffic: Computer, laptop, smartwatch, phone, etc \n• Host can be client or server \n• Servers can sometime be clients too\n5\nHost\nHost\nClient Server\n6\nHow does host send data?\nIP Address\n• Host needs address to send the data \n• This address is known as IP address"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 4,
+        "text": "IP Address\n• Host needs address to send the data \n• This address is known as IP address \n• When client sends data it provides both source IP and destination IP \n• IP addresses are 32 bits. Each bit can be 0 or 1 \n• Total of 4 octets. Each octet ranges from 0-255 (8 bits) \n• IP addresses are usually hierarchically assigned \n• Eg: 192.168.1.1 \n7\nSometimes we need more signal Strength\nRepeater\n• Repeater allows regeneration of signals for long distance communication \n• Think of wifi in home"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 5,
+        "text": "• Repeater allows regeneration of signals for long distance communication \n• Think of wifi in home \n• Signal strength may not be there \n• Repeater might be needed to transmit to longer ranges \n• But we cannot just connect one host to another - Not Scalable!\n8\nHubs and Bridges\nHubs \n• Multi-port repeaters \n• Key issue: Everyone receives everyones data \nBridges \n• Sit between two hubs  \n• They have only two ports \n• They learn which hosts are on either side (for \nrouting)"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 6,
+        "text": "• They have only two ports \n• They learn which hosts are on either side (for \nrouting) \n• Eg: H1 wants to communicate with H2\n9\nHub\nH2\nH1\nH3\nHub 1\nH2\nH1\nHub 2\nH4\nH3\nBridge\nSwitches\n• Devices which facilitate \ncommunication within a network \n• Combination of hubs and ports \n• Knows or infers which hosts are on \neach port \n• They have multiple ports \n• Whatever connected to switch \nbecomes part of one network\n10\nSwitch\nH2\nH1\nH3\n192.168.10.x\n.30\n.20\n.10"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 7,
+        "text": "becomes part of one network\n10\nSwitch\nH2\nH1\nH3\n192.168.10.x\n.30\n.20\n.10\nWhat if the host 192.168.10.20 wants to communicate with \nAnother host in different network?\nRouters\n• Facilitate communication between the \nnetworks \n• They provide like a traffic control point \n• Security, filtering, redirection \n• Routers learn which networks they are \nattached to \n• Known as routes \n• Stored in a routing table \n• Routers have their IP address in the \nnetwork they are attached to\n11\nRouter\nSwitch\nH2\nH1"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 8,
+        "text": "• Routers have their IP address in the \nnetwork they are attached to\n11\nRouter\nSwitch\nH2\nH1\nH3\n192.168.10.x\n.30\n.20\n.10\nSwitch\nH2\nH1\nH3\n172.190.20.x\n.30\n.20\n.10\nRouters\n• Allows creation of hierarchy in the \nnetworks \n• Every time hosts wants to go out of \nthe network, it goes through router \n• Internet is nothing but bunch of \nrouters \n• Gateway (IP address of router in the \ngiven network) \n• Becomes exit point of hosts outside \ntheir network\n12\nRouter\nSwitch\nH2\nH1\nH3\n192.168.10.x\n.30\n.20\n.10"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 9,
+        "text": "their network\n12\nRouter\nSwitch\nH2\nH1\nH3\n192.168.10.x\n.30\n.20\n.10\nSwitch\nH2\nH1\nH3\n172.190.20.x\n.30\n.20\n.10\nThe Bigger Picture\n13\nWhat happens internally when one process wants to share/\nreceive data from another host?\n14\nNetwork Types\nMultiple types of networks exist\n• Personal Area Network - PAN \n• Devices communicate over a very short range \n• Eg: Bluetooth (master slave paradigm) \n• Local Area Network - LAN"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 10,
+        "text": "• Eg: Bluetooth (master slave paradigm) \n• Local Area Network - LAN \n• Private network operating within and nearby a single building (home, office, factory, etc.) \n• Wireless LANs runs speed from 11 Mbps to 7 Gbps (1 Mbps is 1,000,000 bits per sec) - \nPower in 10 (not in terms of 2) \n• Wired LANs operate at speed ranging from 100 Mbps to 40 Gbps (low latency) \n• Eg: connecting personal computers and consumer electronics (eg: printer)\n15\nNetwork Types\nWe have come a long way!"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 11,
+        "text": "15\nNetwork Types\nWe have come a long way!\n• One large Physical LAN can be divided into smaller logical LANs (Virtual LANs) \n• Earlier days it was about broadcasting on a single line! \n• At most one computer could transmit successfully at a time \n• Use static allocation techniques \n• Every machine gets some time to transmit or receive \n• Round robin was used for scheduling \n• Packet collision used to happen (Wait for some random time and try again)\n16\nNetwork Types"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 12,
+        "text": "• Packet collision used to happen (Wait for some random time and try again)\n16\nNetwork Types\n• Metropolitan Area Network - MAN \n• Covers a city (City wide networks) \n• Think of cable TV networks (Earlier Antenna on top of the house and from the top of the hill \nthe communication used to happen) \n• Idea of cable TV was used for providing two services (Internet and TV) \n• Wide Area Network - WAN \n• Spans a large geographical area (often country, continent, etc.)"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 13,
+        "text": "• Wide Area Network - WAN \n• Spans a large geographical area (often country, continent, etc.) \n• Eg: Internet is a large WAN (Dedicated WANs also exist) \n• There can be WAN that connects offices of organisation in different locations  \n• Higher latency and lower transmission speeds. Cost for dedicated ones can be high\n17\nComponents of a network\n18\nMachine 1\nMachine 2\nRouter\nSwitch\nSwitch\nLink\nHost\nHost\nLink\nProcess Communicating over network\n• Process A (eg: Whatsapp) is executing in Host 1"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 14,
+        "text": "Host\nLink\nProcess Communicating over network\n• Process A (eg: Whatsapp) is executing in Host 1 \n• Process B (whatsapp) executing in Host 2 \n• Process A wants to communicate with Process B \n• Some system call is made to access the network  \n• Leads to an interrupt  \n• Process A should know where process B is  \n• Hardware support is needed (some network device with drivers)\n19\nAn Illustrative Scenario\nSending Letter/Courier \n20"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 15,
+        "text": "19\nAn Illustrative Scenario\nSending Letter/Courier \n20\nTwo large communities in different parts of the city, two people in each community to \ncollect and deliver the letters/couriers\nAn Illustrative Scenario\n21\nKey points: Door number, building number, Post office has an identifier, etc.  \nLets take this to Process communication\n• Process A (eg: Whatsapp) is executing in Host 1 \n• Process B (Whatsapp) is executing in Host 2 \n• Host 1 will have an address, same is the case with host 2"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 16,
+        "text": "• Host 1 will have an address, same is the case with host 2 \n• How to ensure the data reaches from Host 1 to Host 2? \n• What all needs to be considered? \n• Remember: There will be multiple processes that are executing in a host\n22\nNetworking Layers\n23\nNetworking Layers\n• Reduce design complexity, network organised a stack of layers or levels \n• The layering provides abstraction in and to other layers \n• Communication (in some sense) happens between the corresponding layers"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 17,
+        "text": "• Communication (in some sense) happens between the corresponding layers \n• Layer n one machine communicates with layer n of another using a protocol \n• Protocol is just like agreement between communicating practices \n• Set of layers along with protocols => Network Architecture  \n• Between each pair of adjacent layer their is an interface \n• Defines the primitive operations and services the lower layer makes available\n24\nThe OSI Model\n25\nApplication\nPresentation\nSession\nTransport\nNetwork"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 18,
+        "text": "24\nThe OSI Model\n25\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\n• Open System Interconnection (OSI)  \n• A Conceptual framework used to understand how \ncommunication works through different layers \n• Divides the network communication process into \nseven layers \n• Developed to facilitate interoperability between \ndifferent technologies  \n• Each layer has a specific function. If they all do what \nthey are supposed to do => sharing of data \nPhysical Layer (L1)"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 19,
+        "text": "they are supposed to do => sharing of data \nPhysical Layer (L1)\nUltimately everything is 0’s and 1’s\n• Data is in the form of bits - 0s and 1s \n• Something has to transport the bits from one \nmachine to another - Physical layer \n• Concerned with transmission of raw bits over \nphysical medium, like a cable \n• L1 technologies: Ethernet cables, Optical fiber, \nCoaxial cable, etc.  \n• Even WiFi is L1 technology, hub, repeater, etc.\n26\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 20,
+        "text": "26\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\nData Link Layer (L2)\nHop to Hop connectivity \n• Interacts with the physical medium \n• Adds/takes data to/from L1 technology \n• Responsible for creating a reliable link between two directly connected \nnodes, error correction, etc. \n• L2’s responsibility is mainly taking data from one hop to another \n• Uses an addressing scheme - MAC addressing \n• 48 bits represented as 12 hex digits"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 21,
+        "text": "• Uses an addressing scheme - MAC addressing \n• 48 bits represented as 12 hex digits \n• L2 Technologies : NIC, WiFi access cards \n• Switches are also L2 technology (help in moving data) \n27\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\nCommunication is just more than Hop to Hop\nWhat about communication from 234 to 345?\n• Hop to hop is guaranteed by L2 \n• What about end-to-end delivery?\n28\nMachine 234\nSwitch\nMachine 489\n Router\nRouter\nMachine 123\nMachine 345\nSwitch"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 22,
+        "text": "28\nMachine 234\nSwitch\nMachine 489\n Router\nRouter\nMachine 123\nMachine 345\nSwitch\nNetwork Layer (L3)\nEnd-to-end Communication\n• Manages routing through different routes in a large \nnetwork \n• Uses an addressing scheme - IP addressing \n• 32 bits represented as 4 octets (IPv4) \n• Performs functionalities such as Logical addressing \n(IP), Path selection and packet forwarding \n• L3 technologies: routers, even hosts are L3, L3 \nswitches \n29\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 23,
+        "text": "switches \n29\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\nTransport Layer (L4)\nService to Service\n• How to ensure that the right process receives the data? \n• Many process will be executing or are waiting to execute? \n• Ensures data transfer is reliable, sequential and free from others \n• Manages flow control and error correction \n• Layer 4 has an addressing scheme to guarantee message delivery \n• Ports! (0 - 65535), Privileged: 0-1023, Registered: 1024 - 49151"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 24,
+        "text": "• Ports! (0 - 65535), Privileged: 0-1023, Registered: 1024 - 49151 \n• Every process will have a port through which sending or receiving \ndata  \n• L4 Technologies: TCP, UDP\n30\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\nSession, Presentation and Application\nApplication to Application\n• Session Layer (L5) \n• Manages connection between different devices \n• Establishing, maintaining and terminating connections \n• Presentation Layer (L6)"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 25,
+        "text": "• Establishing, maintaining and terminating connections \n• Presentation Layer (L6) \n• Ensures that data is in format that sender and receiver can understand \n• Manages data encryption, compression \n• Application Layer  (L7) \n• Provides network services to the application processes \n• Eg: web browser, email clients, other softwares/apps\n31\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\nPutting It Together\n32\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 26,
+        "text": "Physical\nPutting It Together\n32\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\nApplication\nPresentation\nSession\nTransport\nNetwork\nData Link\nPhysical\n10001000010000010000\nMAC | IP | TCP | Data\nIP | TCP | Data\nTCP | Data\nEncapsulation\nDencapsulation\nSegment \nPacket \nFrame \nThe 4 Layer Model\nInternet Model or TCP/IP model,\n• OSI model is more educational purpose \n• 4 layer model more used in reality  \n• Application layer - Corresponds to application,"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 27,
+        "text": "• 4 layer model more used in reality  \n• Application layer - Corresponds to application, \npresentation and session  \n• Transport layer  - Transport layer of OSI \n• Internet layer - Network layer of OSI \n• Network - Physical and data link layers of OSI\n33\nApplication\nTransport\nInternet\nNetwork/Link\nNetwork Protocol Stack\n34\nHTTP\nSMTP\nRTP\nDNS\nTCP\nUDP\nIP\nICMP\nDSL\nEthernet\n802.11\nSONET\nApplication \nTransport \nInternet\nLink \n35\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn"
+    },
+    {
+        "paper_id": 7,
+        "paper_name": "OSN_L06.pdf",
+        "chunk_id": 28,
+        "text": "Transport \nInternet\nLink \n35\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\nTransport Layer and how it works!\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• Computer Networks, 6e by Tanebaum, Teamster and Wetherall\n• Computer Networks: A Top Down Approach by Kurose and Ross"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 2,
+        "text": "• Computer Networks: A Top Down Approach by Kurose and Ross\n• Computer Networking essentials, Youtube Channel\n• Other online sources which are duly cited\n2\nNetwork Protocol Stack\n3\nHTTP\nSMTP\nRTP\nDNS\nTCP\nUDP\nIP\nICMP\nDSL\nEthernet\n802.11\nSONET\nApplication \nTransport \nInternet\nLink \nOnto Transport Layer\nService to Service Delivery\n• Multiplexing and Demultiplexing \n• Addressing scheme: Ports  \n• Two strategies/protocols that allows this \n• Transmission Control Protocol (TCP) -  favours reliability"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 3,
+        "text": "• Transmission Control Protocol (TCP) -  favours reliability \n• User Datagram Protocol (UDP) - favours efficiency \n4\nLets go back\nTwo process wants to communicate \n• Client sends a request to the server \n• The server provides a reply based on the \nrequest made by client \n• Eg: File transfer to get files \n• Eg: web browsing, sent a url and get page \n• How to transport data from process to \nprocess?\n5\nThe role of Operating System"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 4,
+        "text": "• How to transport data from process to \nprocess?\n5\nThe role of Operating System \n• Software component in the OS that supports network calls - Protocol stack \n• Provides Service primitives which are nothing but system calls - Some API?\n6\nAny idea on what should be some functionalities that should be \nmade available? \nHint: Think of process API\n7\nThe Socket API\n• Simple abstraction to use the network \n• The network service API is used to write all network applications"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 5,
+        "text": "• The network service API is used to write all network applications \n• Part of all OS and all languages [Berkley Unix, 1983] \n• Allows user space applications to interact with the networking subsystem \n• Two services: \n• Streams: Reliable (Connection-oriented) \n• Datagram: Unreliable (Connection-less) \n• Allows applications to attach to the network at different ports\n8\nThe Socket API\n9\nFunction\nDescription\nsocket()\nCreates a new socket of a certain type (depending on TCP"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 6,
+        "text": "9\nFunction\nDescription\nsocket()\nCreates a new socket of a certain type (depending on TCP \nor UDP) and returns file descriptor \nbind()\nAssociates the socket with a specific IP and port\nlisten()\nFor server sockets, it allows sockets to listen for incoming \nconnections\naccept()\nFor server sockets, it waits for client to connect and then \nreturn a new file descriptor\nconnect()\nFor client sockets, it initiates a connection to a server.\nsend() / receive()\nTransmit data or receive data \nclose()"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 7,
+        "text": "send() / receive()\nTransmit data or receive data \nclose()\nTerminate the connection\nUsing Sockets\n10\nTime\nMore about Ports \n11\n• Application process is identified by tuple (IP address, Protocol, Port) \n• Port are 16-bit integers representing “mailboxes” that process \nleases \n• Servers are often bind to “well-known-ports” \n• Clients are assigned ephemeral ports \n• Chosen by the OS temporarily \nSome well Known Ports\n12\nPort\nProtocol\nUse\n20, 21\nFTP\nFile Transfer\n22\nSSH\nRemote login\n25\nSMTP\nEmail\n80"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 8,
+        "text": "12\nPort\nProtocol\nUse\n20, 21\nFTP\nFile Transfer\n22\nSSH\nRemote login\n25\nSMTP\nEmail\n80\nHTTP\nWorld wide web\n443\nHTTPS\nSecured web\n543\nRTSP\nMedia Player Control\nAn Opportunity for a Context Switch?\n• The calls of establishing socket are blocking calls \n• connect(), accept(), receive() \n• Once the call is made, OS halts the program to wait to receive some \nresponse \n• They are essentially System calls \n• Trap instruction is called and there is an opportunity for a context switch\n13"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 9,
+        "text": "• Trap instruction is called and there is an opportunity for a context switch\n13\nLet us take a step back\nTypes of Links\n• Full Duplex \n• Bidirectional \n• Both sides at the same time \n• Half-duplex \n• Bidirectional \n• Both the sides but only one direction at a time (eg: walkie talkies) \n• Simplex \n• Unidirectional\n14\nTransport Services and Protocols\n• Provides logical communication between \napplication processes running on different \nhosts \n• Transport protocols actions in the end \nsystems:"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 10,
+        "text": "hosts \n• Transport protocols actions in the end \nsystems: \n• Sender: breaks application messages \ninto segments, passes to network layer \n• Receiver: reassembles messages into \nmessages, passes to application layer \n• Protocols: TCP, UDP\n15\nH1\nH2\nInternet\nApplication \nTransport \nInternet\nNetwork\nApplication \nTransport \nInternet\nNetwork\nQuick Recap\n• Segments carry data across the network \n• Segments are carried within the packets, within frames"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 11,
+        "text": "• Segments are carried within the packets, within frames  \n• Each layer adds a header (Above L4 will be replaced by its header)\n16\n802.11\nIP\nL4\nApp eg: HTTP \nSMTP\nFrame\nPacket\nSegment\nMultiplexing and Demultiplexing\n• Multiplexing as sender: Handle data \nfrom multiple sockets, add transport \nheader \n• Demultiplexing as receiver: Use \nheader info to deliver received \nsegments to correct socket\n17\nApplication\nTransport\nMultiplexing\nDemultiplexing\nWorking of Demultiplexing"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 12,
+        "text": "17\nApplication\nTransport\nMultiplexing\nDemultiplexing\nWorking of Demultiplexing\n• Host receives IP datagrams \n• Each datagram has source IP address, \ndestination IP address \n• Each datagram carries one transport layer \nsegment  \n• Each segment has source and destination \nport number \n• IP addresses and ports are used to direct \nsegment to appropriate socket  \n18\nSource Port #\nDestination Port #\nOther header fields\nApplication data  \n(payload)\nTCP/UDP Segment format"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 13,
+        "text": "Destination Port #\nOther header fields\nApplication data  \n(payload)\nTCP/UDP Segment format\nConnection Oriented vs Connectionless\nDemultiplexing Scenarios\n• Connection oriented (TCP) \n• TCP socket identified by 4 tuple \n• Source IP, destination IP, source \nport and destination port \n• Receiver uses all 4 to direct segment \nto appropriate socket \n• Server may support many TCP \nsockets  \n• Each socket has it own client\n19\n• Connectionless (UDP) \n• UDP socket identified by 2 tuple"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 14,
+        "text": "• Each socket has it own client\n19\n• Connectionless (UDP) \n• UDP socket identified by 2 tuple \n• Destination IP and port \n• Receiver uses the port to redirect to \nthe corresponding socket \n• UDP segments with same destination \nport but different IP or source port \n• Redirected to same socket\nTCP vs UDP\n20\nTCP\nUDP\nConnection Oriented\nNot Connection Oriented\nReliability (order is maintained and retransmission)\nNo reliability at L4\nHigher overhead - reliability, error checking, etc\nLow overhead"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 15,
+        "text": "No reliability at L4\nHigher overhead - reliability, error checking, etc\nLow overhead \nFlow control (based on network)\nNo implicit flow control\nError detection - retransmit erroneous packets\nHas some error checking - Erroneous packets are \ndiscarded without notification\nCongestion Control\nNo Congestion Control\nUse cases: HTTP/HTTPS, File transfer, Mail\nUse cases: Streaming data, VoIP, DNS queries, ..\nConnection Oriented and Reliability\n• Connection Oriented"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 16,
+        "text": "Connection Oriented and Reliability\n• Connection Oriented  \n• In TCP, the connection is first established before the data is transmitted \n• In UDP there is no notion of connection starting and ending (use timeout) \n• Reliability \n• Confirmation of data delivery (Acknowledgement is there) in TCP \n• Order is preserved or maintained  \n• Error can be handled  (Awareness). TCP can handle it. \n• In UDP there is no confirmation, the client trusts that there is someone to receive the"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 17,
+        "text": "• In UDP there is no confirmation, the client trusts that there is someone to receive the \ndata (Fire and Forget) \n• No error awareness (at L4). Protocol does not handle it\n21\nFlow Control and Overhead\n• Flow Control \n• TCP can adjust the transmission rate to use maximum available bandwidth \n• Check how much the receiver can receive and adjust accordingly \n• Overhead \n• TCP Adds a larger header to the data ~ 20 bytes or even more \n• TCP has more features that does not exist in UDP"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 18,
+        "text": "• TCP has more features that does not exist in UDP \n• In UDP the header length is ~ 8 bytes\n22\nL4\nData\nUDP Segment Header\n23\nSource Port #\nDestination Port #\nApplication data  \n(payload)\nUDP Segment Format\nLength\nChecksum\n32 bits\n• Length: In bytes of the UDP segment \nincluding the header \n• Checksum: For error detection (16 bit \nvalue which represents the sum of UDP \nheader, payload and Pseudo header from \nIP layer) \n• Supports Error detection  \n• Makes use of 1’s compliment arithmetic"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 19,
+        "text": "IP layer) \n• Supports Error detection  \n• Makes use of 1’s compliment arithmetic \nto find the sum \nChecksum Process\n• Sender \n• All contents of the header including IP \naddresses are treated as sequence of 16 \nbit integers \n• Checksum: addition (one’s complement) \nof segment content \n• Receiver \n• Compute checksum of received content \n• Check if received and header checksum \nare equal - No error \n• Else, Error detected\n24\nAdd it back\nSum\nChecksum\nExample"
+    },
+    {
+        "paper_id": 8,
+        "paper_name": "OSN_L07.pdf",
+        "chunk_id": 20,
+        "text": "are equal - No error \n• Else, Error detected\n24\nAdd it back\nSum\nChecksum\nExample\nTCP is the most used protocol on the internet. How does TCP work? \nWhat all you need to provide some features that TCP provides?\n25\n26\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
     }
 ]
