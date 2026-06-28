@@ -2,6 +2,7 @@ import json
 import re
 import faiss
 import numpy as np
+from sentence_transformers import CrossEncoder
 
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
@@ -22,6 +23,10 @@ def main():
     index = faiss.read_index("indexes/faiss_index.bin")
 
     model = SentenceTransformer("all-MiniLM-L6-v2")
+    
+    reranker = CrossEncoder(
+        "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    )
 
     corpus = [tokenize(chunk["text"]) for chunk in chunks]
 
@@ -58,17 +63,37 @@ def main():
         if i not in merged_indices:
             merged_indices.append(i)
 
-    retrieved_chunks = []
-    retrieved_metadata = []
+    pairs = []
 
     for i in merged_indices:
 
-        retrieved_chunks.append(chunks[i]["text"])
+        pairs.append(
+            (
+                query,
+                chunks[i]["text"]
+            )
+        )
+
+    scores = reranker.predict(pairs)
+
+    ranked = sorted(
+        zip(scores, merged_indices),
+        reverse=True
+    )
+
+    retrieved_chunks = []
+    retrieved_metadata = []
+
+    for _, idx in ranked[:3]:
+
+        retrieved_chunks.append(
+            chunks[idx]["text"]
+        )
 
         retrieved_metadata.append(
             {
-                "paper_name": chunks[i]["paper_name"],
-                "chunk_id": chunks[i]["chunk_id"]
+                "paper_name": chunks[idx]["paper_name"],
+                "chunk_id": chunks[idx]["chunk_id"]
             }
         )
 
