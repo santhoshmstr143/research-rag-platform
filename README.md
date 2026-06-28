@@ -250,11 +250,7 @@ http://localhost:5173
 
 ---
 
-## Screenshots
 
-(Add frontend screenshots here.)
-
----
 
 ## License
 
