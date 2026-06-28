@@ -3,13 +3,9 @@ import fitz
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+def extract_text(pdf_name):
 
-def extract_text(pdf_path):
-
-    pdf_path = Path(pdf_path)
-
-    if not pdf_path.is_absolute():
-        pdf_path = BASE_DIR / pdf_path
+    pdf_path = BASE_DIR / "data" / pdf_name
 
     pdf = fitz.open(str(pdf_path))
 
@@ -17,5 +13,7 @@ def extract_text(pdf_path):
 
     for page in pdf:
         full_text += page.get_text()
+
+    pdf.close()
 
     return full_text

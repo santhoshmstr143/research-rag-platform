@@ -592,5 +592,281 @@
         "paper_name": "OSN_L04.pdf",
         "chunk_id": 25,
         "text": "• Imagine a user sitting in front of the machine and executing the \ncommand \n• The machine identifies the nature of the job and schedules it \n• What about response time?\n38\nTresponse = Tfirstrun −Tarrival\n39\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\nProcess Virtualisation - Policies (Scheduling) and  \nProcess Communication (Intro to networks)\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Renzi et al."
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 2,
+        "text": "Sources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Renzi et al. \n• Modern Operating Systems, Tanenbaum et al.\n• Networking Fundamentals by Practical Networking (Youtube Channel)\n• Other online sources which are duly cited\n2\nIts not just about Turnaround time!\n• What about the user side? \n• What if this is an interactive process? \n• Think about going to Amazon or Working with some desktop application \n• Imagine a user sitting in front of the machine and executing the \ncommand"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 3,
+        "text": "• Imagine a user sitting in front of the machine and executing the \ncommand \n• The machine identifies the nature of the job and schedules it \n• What about response time?\n3\nTresponse = Tfirstrun −Tarrival\nRound Robin Scheduling\n• Instead of running jobs for completion \n• Can we run jobs for time intervals? \n• Policy: Run jobs for a time slice -> switch to next job -> repeat till all are done! \n• Key idea: Use the notion of time slice, considering timer interrupts"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 4,
+        "text": "• Key idea: Use the notion of time slice, considering timer interrupts \n• Take into consideration the overhead of Context Switch\n4\nRound Robin Scheduling\n• What if we used SJF for the below scenario?\n5\nProcess\nArrival\nTime to Complete\nW\n0\n5\nS\n0\n5\nT\n0\n5\nAvg(Tturnaround) = 5 + 10 + 15\n3\n= 10\nAvg(Tresponse) = 0 + 5 + 10\n3\n= 5\nCan we do better?\nRound Robin Scheduling\n• What if we do round robin with a time slice = 1 sec?\n6\nAvg(Tresponse) = 0 + 1 + 2\n3\n= 1\nW is added in the 0th Second"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 5,
+        "text": "6\nAvg(Tresponse) = 0 + 1 + 2\n3\n= 1\nW is added in the 0th Second \nT in the 1st second \nS in the second second\nDo we foresee some issue?\nRound Robin Scheduling\n• Time slice plays a critical role in response time part \n• Too small time slice can result in an overhead - Too much Context Switch! \n• RR is a good scheduling method \n• Key thing is to find an optimal time slice \n• Response time is the only metric \n• What about turnaround? \n7\nAvg(Tturnaround) = 13 + 14 + 15\n3\n= 14!\nRemember: Trade-off"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 6,
+        "text": "• What about turnaround? \n7\nAvg(Tturnaround) = 13 + 14 + 15\n3\n= 14!\nRemember: Trade-off\n• Turnaround time only cares about completion \n• Fairness of scheduling does not come into the picture - Given! \n• Fairness here comes at the cost of turnaround time \n• The key aspect is to consider trade-off’s \n• Very important in system design \n• Often among quality attributes \n• Eg: security vs performance\n8\nContinuing on the Assumptions \n• Jobs don’t perform I/O \n• Run-time of each job is known"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 7,
+        "text": "8\nContinuing on the Assumptions \n• Jobs don’t perform I/O \n• Run-time of each job is known \nWhat can be done to consider I/O? Can we do RR Scheduling  \nby considering I/O?\n9\nIncorporating I/O\n• When there is a job doing I/O, Scheduler needs to be more decisive \n• During I/O what will usually happen? \n• The job will be blocked for I/O completion \n• If I/O is hard disk dependant then it may require more time \n• What can be an easy way out? \n• When I/O is done - Interrupt is raised"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 8,
+        "text": "• What can be an easy way out? \n• When I/O is done - Interrupt is raised \n• OS moves the process (Job) from blocked to ready state\n10\nLets consider a scenario\n• Assume two process: Microsoft Word \n(autosave), your C program executing \nsome numerical computation (No I/O \naccess) \n• Microsoft Word (M): autosaves \nevery 20 seconds => I/O access \n• C program (C): No I/O access\n11\nCan we do better?\nShortest Time to Completion First (STCF)\nCan we leverage STCF?"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 9,
+        "text": "11\nCan we do better?\nShortest Time to Completion First (STCF)\nCan we leverage STCF?\n• Policy: CPU is used by one process while the other one uses the disk \n• Each CPU burst can be treated of as separate job \n• Better utilization of the processor\n12\nDo we miss something?\nWe may not know the length or expected time of completion of \na job? — How to handle?\n13\nLets go back to the example\nHow can Librarian take a guess?\n14\nScheduler\nWhy don’t we Prioritise?\n15\nSource: https://imgur.com"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 10,
+        "text": "How can Librarian take a guess?\n14\nScheduler\nWhy don’t we Prioritise?\n15\nSource: https://imgur.com\nLets go back to the example\nIntroduce Priority - Give priority, Observe and Improve\n16\nP1\nP2\nP3\nP0\nMulti Level Feedback Queues (MLFQ)\nTwo main features \n• Reduce turn around times \n• Run shortest jobs first  \n• Reduce response time \nCan the policy learn continously to optimise response time and turnaround \ntime? \nConstraint: No apriori knowledge of the job length!\n17\nMLFQ: Basic Rules"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 11,
+        "text": "time? \nConstraint: No apriori knowledge of the job length!\n17\nMLFQ: Basic Rules\n• Use n number of distinct queues  \n• Each queue has a different priority level \n• Use priority to decide which job should be run at a given time \n• A job with a higher priority => job on a higher queue  \n• Key idea: \n• Scheduler sets priority to different jobs \n• Keep updating the priority based on observed behaviour\n18\nGoing back to the example\n19\nMLFQ"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 12,
+        "text": "• Keep updating the priority based on observed behaviour\n18\nGoing back to the example\n19\nMLFQ\n• Jobs that keep giving back the CPU - interactive jobs (higher priority) \n• Jobs that uses CPU for more time - Reduce priority  \n• Learn about the processes as they run and predict future (Not using AI) \n• Two basic rules: \n1. If priority (A) > Priority (B), A runs \n2. If priority (A) = Priority (B), A&B run in Round Robin\n20\nMLFQ: Visualisation\nFive queues and 4 jobs\n21\n• Use notion of time slices"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 13,
+        "text": "20\nMLFQ: Visualisation\nFive queues and 4 jobs\n21\n• Use notion of time slices \n• When job enters, high priority \n• If job uses up the entire time slice \n• Reduce priority (move down one queue) \n• If job gives up CPU before time slice is up \n• Keep it at the same priority level\nExample: Single Long Running Job\n• Three queues \n• Priority: Q2 > Q1 > Q0 \n• Single job M enters at t=0 \n• Time slice = 10 seconds \n• After running for 10 seconds, priority \nis lowered\n22\nExample: Short job enters"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 14,
+        "text": "• After running for 10 seconds, priority \nis lowered\n22\nExample: Short job enters\n• P (interactive job) \n• Enters at t=100 \n• Runs for 10 second \n• Goes to the second queue \n• Incoming job is considered \nshort => placed in higher queue \n• If its short, it will keep running  \n• Else moves down\n23\nIncorporating I/O\n• Highly interactive job => \nrelinquishes CPU faster \n• Priority is kept at same level \n• Long term job can take more time \nand execute in lower queue \nWhat could be the challenges?\n24"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 15,
+        "text": "• Long term job can take more time \nand execute in lower queue \nWhat could be the challenges?\n24\nWhat are the challenges with previous model?\nIt can lead to two major challenges\n• Starvation \n• Too many interactive jobs will keep consuming CPU \n• Long running job will never get any CPU - Starve!! \n• Gaming of Scheduler \n• The process can trick the scheduler into giving more than fair share - How? \n• Idea: Give an I/O request and relinquish the CPU before time slice is over"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 16,
+        "text": "• Idea: Give an I/O request and relinquish the CPU before time slice is over \n• Priority does not change!! (Monopolise the CPU)\n25\nAnother Challenge to Consider\n• Program may also change behaviour over time \n• Suddenly there may be more CPU intensive phases \n• There may be also phases of interactiveness \n• Eg: Some long numerical computation followed by interactiveness \nCan you think of some way to handle this?\n26\nPriority Boost\n• Periodically boost the priority of all the jobs"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 17,
+        "text": "26\nPriority Boost\n• Periodically boost the priority of all the jobs \n• This can prevent starvation \n• Rule: After a time interval S, move all jobs to top most \nqueue \n• Provides two key guarantees \n• Processes are guaranteed not to starve \n• If CPU bound has become interactive, scheduler will \ngive it chances \n• Thanks to the periodic priority updates!\n27\nCase 1\nNon priority Boost Scenario\n28\nStarves!!\nInteractive jobs keep getting the CPU\nCase 2\nWith Priority Boost (S = 50)\n29"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 18,
+        "text": "28\nStarves!!\nInteractive jobs keep getting the CPU\nCase 2\nWith Priority Boost (S = 50)\n29\nOne additional Challenge\n• How to determine the value of S? \n• If S is very small, interactive jobs may not get proper share of CPU \n• If S is too high, long running jobs could starve \n• Tricky part is to come up with a value of S \n• Voo-doo constants - Named by John Ousterhout  \n• What about gaming the scheduler? - S by itself cannot solve it!\n30\nBetter Accountability"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 19,
+        "text": "• What about gaming the scheduler? - S by itself cannot solve it!\n30\nBetter Accountability\nHow to prevent gaming of the scheduler?\n• Introduce one more rule \n• Once a job uses its time allotment, \nit needs to be moved down \n• No consideration if the job has \nrelinquished CPU ahead of time \nslice \n• Prevent the gaming since no matter \nwhat, priority reduces\n31\nTuning MLFQ\n• How to parametrise the scheduler? \n• How many queues? \n• What should be the time slice?"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 20,
+        "text": "• How to parametrise the scheduler? \n• How many queues? \n• What should be the time slice? \n• How often the priority boost needs to be done? \n• High priority queues: Interactive jobs with shorter time slices (10 ms) \n• Low priority queues: CPU bound jobs with longer time slices (100 ms or \nless)\n32\nExample Scenario\n• Different queues \n• Low priority and high \nPriority queues \n• Each queue has a different \nslice interval \n• Based on scenario, S \nchanges (boost interval)\n33\nSolaris MLFQ"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 21,
+        "text": "slice interval \n• Based on scenario, S \nchanges (boost interval)\n33\nSolaris MLFQ\n• Tables to configure: \n• How long should be the time slice? \n• How often to boost? \n• 60 queues  \n• Time slice length from 20ms to few 100 milliseconds \n• Priority boosted every 1 second \n• Free BSD scheduler uses formula to calculate priority \n34\nMLFQ: Summing Up\n• Five key rules are used by MLFQ: \n• If P(A) > P(B),  A runs (B not) \n• If P(A) >= P(B), A & B runs in Round Robin using time slice of queue"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 22,
+        "text": "• If P(A) >= P(B), A & B runs in Round Robin using time slice of queue \n• When job enters, its placed in the highest priority \n• Once job uses its time allotment at a given level => priority is reduced \n• After a period, S move all jobs to top most priority queue  \n• BSD Unix derivatives, Windows NT and Solaris use a form of MLFQ in their basic \nscheduler\n35\nWhat about processes in different machines?\nHow can they communicate?\n36\nHow does message/data from P1 in System 1 reach P1 in System 2?"
+    },
+    {
+        "paper_id": 5,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 23,
+        "text": "How can they communicate?\n36\nHow does message/data from P1 in System 1 reach P1 in System 2?\nWhat is the role of the OS in this and how does it contribute to the effectiveness?\n37\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 1,
+        "text": "Karthik Vaidhyanathan \nCS3.301 Operating Systems \nand Networks\nProcess Virtualisation - Policies (Scheduling) and  \nProcess Communication (Intro to networks)\nhttps://karthikvaidhyanathan.com\n￼1\nAcknowledgement\nThe materials used in this presentation have been gathered/adapted/generate from various \nsources as well as based on my own experiences and knowledge -- Karthik Vaidhyanathan\nSources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Renzi et al."
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 2,
+        "text": "Sources:\n• OSTEP Educator Materials, Remzi et al.\n• OSTEP Book by Renzi et al. \n• Modern Operating Systems, Tanenbaum et al.\n• Networking Fundamentals by Practical Networking (Youtube Channel)\n• Other online sources which are duly cited\n2\nIts not just about Turnaround time!\n• What about the user side? \n• What if this is an interactive process? \n• Think about going to Amazon or Working with some desktop application \n• Imagine a user sitting in front of the machine and executing the \ncommand"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 3,
+        "text": "• Imagine a user sitting in front of the machine and executing the \ncommand \n• The machine identifies the nature of the job and schedules it \n• What about response time?\n3\nTresponse = Tfirstrun −Tarrival\nRound Robin Scheduling\n• Instead of running jobs for completion \n• Can we run jobs for time intervals? \n• Policy: Run jobs for a time slice -> switch to next job -> repeat till all are done! \n• Key idea: Use the notion of time slice, considering timer interrupts"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 4,
+        "text": "• Key idea: Use the notion of time slice, considering timer interrupts \n• Take into consideration the overhead of Context Switch\n4\nRound Robin Scheduling\n• What if we used SJF for the below scenario?\n5\nProcess\nArrival\nTime to Complete\nW\n0\n5\nS\n0\n5\nT\n0\n5\nAvg(Tturnaround) = 5 + 10 + 15\n3\n= 10\nAvg(Tresponse) = 0 + 5 + 10\n3\n= 5\nCan we do better?\nRound Robin Scheduling\n• What if we do round robin with a time slice = 1 sec?\n6\nAvg(Tresponse) = 0 + 1 + 2\n3\n= 1\nW is added in the 0th Second"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 5,
+        "text": "6\nAvg(Tresponse) = 0 + 1 + 2\n3\n= 1\nW is added in the 0th Second \nT in the 1st second \nS in the second second\nDo we foresee some issue?\nRound Robin Scheduling\n• Time slice plays a critical role in response time part \n• Too small time slice can result in an overhead - Too much Context Switch! \n• RR is a good scheduling method \n• Key thing is to find an optimal time slice \n• Response time is the only metric \n• What about turnaround? \n7\nAvg(Tturnaround) = 13 + 14 + 15\n3\n= 14!\nRemember: Trade-off"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 6,
+        "text": "• What about turnaround? \n7\nAvg(Tturnaround) = 13 + 14 + 15\n3\n= 14!\nRemember: Trade-off\n• Turnaround time only cares about completion \n• Fairness of scheduling does not come into the picture - Given! \n• Fairness here comes at the cost of turnaround time \n• The key aspect is to consider trade-off’s \n• Very important in system design \n• Often among quality attributes \n• Eg: security vs performance\n8\nContinuing on the Assumptions \n• Jobs don’t perform I/O \n• Run-time of each job is known"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 7,
+        "text": "8\nContinuing on the Assumptions \n• Jobs don’t perform I/O \n• Run-time of each job is known \nWhat can be done to consider I/O? Can we do RR Scheduling  \nby considering I/O?\n9\nIncorporating I/O\n• When there is a job doing I/O, Scheduler needs to be more decisive \n• During I/O what will usually happen? \n• The job will be blocked for I/O completion \n• If I/O is hard disk dependant then it may require more time \n• What can be an easy way out? \n• When I/O is done - Interrupt is raised"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 8,
+        "text": "• What can be an easy way out? \n• When I/O is done - Interrupt is raised \n• OS moves the process (Job) from blocked to ready state\n10\nLets consider a scenario\n• Assume two process: Microsoft Word \n(autosave), your C program executing \nsome numerical computation (No I/O \naccess) \n• Microsoft Word (M): autosaves \nevery 20 seconds => I/O access \n• C program (C): No I/O access\n11\nCan we do better?\nShortest Time to Completion First (STCF)\nCan we leverage STCF?"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 9,
+        "text": "11\nCan we do better?\nShortest Time to Completion First (STCF)\nCan we leverage STCF?\n• Policy: CPU is used by one process while the other one uses the disk \n• Each CPU burst can be treated of as separate job \n• Better utilization of the processor\n12\nDo we miss something?\nWe may not know the length or expected time of completion of \na job? — How to handle?\n13\nLets go back to the example\nHow can Librarian take a guess?\n14\nScheduler\nWhy don’t we Prioritise?\n15\nSource: https://imgur.com"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 10,
+        "text": "How can Librarian take a guess?\n14\nScheduler\nWhy don’t we Prioritise?\n15\nSource: https://imgur.com\nLets go back to the example\nIntroduce Priority - Give priority, Observe and Improve\n16\nP1\nP2\nP3\nP0\nMulti Level Feedback Queues (MLFQ)\nTwo main features \n• Reduce turn around times \n• Run shortest jobs first  \n• Reduce response time \nCan the policy learn continously to optimise response time and turnaround \ntime? \nConstraint: No apriori knowledge of the job length!\n17\nMLFQ: Basic Rules"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 11,
+        "text": "time? \nConstraint: No apriori knowledge of the job length!\n17\nMLFQ: Basic Rules\n• Use n number of distinct queues  \n• Each queue has a different priority level \n• Use priority to decide which job should be run at a given time \n• A job with a higher priority => job on a higher queue  \n• Key idea: \n• Scheduler sets priority to different jobs \n• Keep updating the priority based on observed behaviour\n18\nGoing back to the example\n19\nMLFQ"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 12,
+        "text": "• Keep updating the priority based on observed behaviour\n18\nGoing back to the example\n19\nMLFQ\n• Jobs that keep giving back the CPU - interactive jobs (higher priority) \n• Jobs that uses CPU for more time - Reduce priority  \n• Learn about the processes as they run and predict future (Not using AI) \n• Two basic rules: \n1. If priority (A) > Priority (B), A runs \n2. If priority (A) = Priority (B), A&B run in Round Robin\n20\nMLFQ: Visualisation\nFive queues and 4 jobs\n21\n• Use notion of time slices"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 13,
+        "text": "20\nMLFQ: Visualisation\nFive queues and 4 jobs\n21\n• Use notion of time slices \n• When job enters, high priority \n• If job uses up the entire time slice \n• Reduce priority (move down one queue) \n• If job gives up CPU before time slice is up \n• Keep it at the same priority level\nExample: Single Long Running Job\n• Three queues \n• Priority: Q2 > Q1 > Q0 \n• Single job M enters at t=0 \n• Time slice = 10 seconds \n• After running for 10 seconds, priority \nis lowered\n22\nExample: Short job enters"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 14,
+        "text": "• After running for 10 seconds, priority \nis lowered\n22\nExample: Short job enters\n• P (interactive job) \n• Enters at t=100 \n• Runs for 10 second \n• Goes to the second queue \n• Incoming job is considered \nshort => placed in higher queue \n• If its short, it will keep running  \n• Else moves down\n23\nIncorporating I/O\n• Highly interactive job => \nrelinquishes CPU faster \n• Priority is kept at same level \n• Long term job can take more time \nand execute in lower queue \nWhat could be the challenges?\n24"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 15,
+        "text": "• Long term job can take more time \nand execute in lower queue \nWhat could be the challenges?\n24\nWhat are the challenges with previous model?\nIt can lead to two major challenges\n• Starvation \n• Too many interactive jobs will keep consuming CPU \n• Long running job will never get any CPU - Starve!! \n• Gaming of Scheduler \n• The process can trick the scheduler into giving more than fair share - How? \n• Idea: Give an I/O request and relinquish the CPU before time slice is over"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 16,
+        "text": "• Idea: Give an I/O request and relinquish the CPU before time slice is over \n• Priority does not change!! (Monopolise the CPU)\n25\nAnother Challenge to Consider\n• Program may also change behaviour over time \n• Suddenly there may be more CPU intensive phases \n• There may be also phases of interactiveness \n• Eg: Some long numerical computation followed by interactiveness \nCan you think of some way to handle this?\n26\nPriority Boost\n• Periodically boost the priority of all the jobs"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 17,
+        "text": "26\nPriority Boost\n• Periodically boost the priority of all the jobs \n• This can prevent starvation \n• Rule: After a time interval S, move all jobs to top most \nqueue \n• Provides two key guarantees \n• Processes are guaranteed not to starve \n• If CPU bound has become interactive, scheduler will \ngive it chances \n• Thanks to the periodic priority updates!\n27\nCase 1\nNon priority Boost Scenario\n28\nStarves!!\nInteractive jobs keep getting the CPU\nCase 2\nWith Priority Boost (S = 50)\n29"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 18,
+        "text": "28\nStarves!!\nInteractive jobs keep getting the CPU\nCase 2\nWith Priority Boost (S = 50)\n29\nOne additional Challenge\n• How to determine the value of S? \n• If S is very small, interactive jobs may not get proper share of CPU \n• If S is too high, long running jobs could starve \n• Tricky part is to come up with a value of S \n• Voo-doo constants - Named by John Ousterhout  \n• What about gaming the scheduler? - S by itself cannot solve it!\n30\nBetter Accountability"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 19,
+        "text": "• What about gaming the scheduler? - S by itself cannot solve it!\n30\nBetter Accountability\nHow to prevent gaming of the scheduler?\n• Introduce one more rule \n• Once a job uses its time allotment, \nit needs to be moved down \n• No consideration if the job has \nrelinquished CPU ahead of time \nslice \n• Prevent the gaming since no matter \nwhat, priority reduces\n31\nTuning MLFQ\n• How to parametrise the scheduler? \n• How many queues? \n• What should be the time slice?"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 20,
+        "text": "• How to parametrise the scheduler? \n• How many queues? \n• What should be the time slice? \n• How often the priority boost needs to be done? \n• High priority queues: Interactive jobs with shorter time slices (10 ms) \n• Low priority queues: CPU bound jobs with longer time slices (100 ms or \nless)\n32\nExample Scenario\n• Different queues \n• Low priority and high \nPriority queues \n• Each queue has a different \nslice interval \n• Based on scenario, S \nchanges (boost interval)\n33\nSolaris MLFQ"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 21,
+        "text": "slice interval \n• Based on scenario, S \nchanges (boost interval)\n33\nSolaris MLFQ\n• Tables to configure: \n• How long should be the time slice? \n• How often to boost? \n• 60 queues  \n• Time slice length from 20ms to few 100 milliseconds \n• Priority boosted every 1 second \n• Free BSD scheduler uses formula to calculate priority \n34\nMLFQ: Summing Up\n• Five key rules are used by MLFQ: \n• If P(A) > P(B),  A runs (B not) \n• If P(A) >= P(B), A & B runs in Round Robin using time slice of queue"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 22,
+        "text": "• If P(A) >= P(B), A & B runs in Round Robin using time slice of queue \n• When job enters, its placed in the highest priority \n• Once job uses its time allotment at a given level => priority is reduced \n• After a period, S move all jobs to top most priority queue  \n• BSD Unix derivatives, Windows NT and Solaris use a form of MLFQ in their basic \nscheduler\n35\nWhat about processes in different machines?\nHow can they communicate?\n36\nHow does message/data from P1 in System 1 reach P1 in System 2?"
+    },
+    {
+        "paper_id": 6,
+        "paper_name": "OSN_L05.pdf",
+        "chunk_id": 23,
+        "text": "How can they communicate?\n36\nHow does message/data from P1 in System 1 reach P1 in System 2?\nWhat is the role of the OS in this and how does it contribute to the effectiveness?\n37\nThank you \nCourse site: karthikv1392.github.io/cs3301_osn \nEmail: karthik.vaidhyanathan@iiit.ac.in \nTwitter: @karthi_ishere"
     }
 ]

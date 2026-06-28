@@ -9,12 +9,6 @@ from src.prompt_builder import build_prompt
 from src.gemini import generate_answer
 
 
-index = faiss.read_index("indexes/faiss_index.bin")
-
-with open("indexes/chunks.json", "r", encoding="utf-8") as f:
-    chunks = json.load(f)
-
-
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 reranker = CrossEncoder(
@@ -22,14 +16,37 @@ reranker = CrossEncoder(
 )
 
 
-tokenized_chunks = []
+index = None
+chunks = None
+bm25 = None
 
-for chunk in chunks:
-    tokenized_chunks.append(
-        chunk["text"].lower().split()
-    )
 
-bm25 = BM25Okapi(tokenized_chunks)
+def load_indexes():
+
+    global index, chunks, bm25
+
+    index = faiss.read_index("indexes/faiss_index.bin")
+
+    with open(
+        "indexes/chunks.json",
+        "r",
+        encoding="utf-8"
+    ) as f:
+
+        chunks = json.load(f)
+
+    tokenized_chunks = []
+
+    for chunk in chunks:
+
+        tokenized_chunks.append(
+            chunk["text"].lower().split()
+        )
+
+    bm25 = BM25Okapi(tokenized_chunks)
+
+
+load_indexes()
 
 
 def search(query):
@@ -98,7 +115,22 @@ def search(query):
 
     answer = generate_answer(prompt)
 
-    return answer, retrieved_metadata
+    unique_sources = []
+    seen = set()
+
+    for source in retrieved_metadata:
+
+        key = (
+            source["paper_name"],
+            source["chunk_id"]
+        )
+
+        if key not in seen:
+
+            seen.add(key)
+            unique_sources.append(source)
+
+    return answer, unique_sources
 
 
 if __name__ == "__main__":
@@ -112,15 +144,9 @@ if __name__ == "__main__":
 
     print("\nSources\n")
 
-    seen = set()
-
     for source in sources:
 
-        citation = (
+        print(
             f"{source['paper_name']} | "
             f"Chunk {source['chunk_id']}"
         )
-
-        if citation not in seen:
-            print(citation)
-            seen.add(citation)
