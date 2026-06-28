@@ -1,65 +1,59 @@
 import json
-import re
 import faiss
 import numpy as np
-from sentence_transformers import CrossEncoder
 
 from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, CrossEncoder
 
-from prompt_builder import build_prompt
-from gemini import generate_answer
-
-
-def tokenize(text):
-    return re.findall(r"\w+", text.lower())
+from src.prompt_builder import build_prompt
+from src.gemini import generate_answer
 
 
-def main():
+index = faiss.read_index("indexes/faiss_index.bin")
 
-    with open("indexes/chunks.json", "r", encoding="utf-8") as f:
-        chunks = json.load(f)
+with open("indexes/chunks.json", "r", encoding="utf-8") as f:
+    chunks = json.load(f)
 
-    index = faiss.read_index("indexes/faiss_index.bin")
 
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    
-    reranker = CrossEncoder(
-        "cross-encoder/ms-marco-MiniLM-L-6-v2"
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+
+reranker = CrossEncoder(
+    "cross-encoder/ms-marco-MiniLM-L-6-v2"
+)
+
+
+tokenized_chunks = []
+
+for chunk in chunks:
+    tokenized_chunks.append(
+        chunk["text"].lower().split()
     )
 
-    corpus = [tokenize(chunk["text"]) for chunk in chunks]
+bm25 = BM25Okapi(tokenized_chunks)
 
-    bm25 = BM25Okapi(corpus)
 
-    query = input("Enter your question: ")
+def search(query):
 
-    # ---------------- FAISS ----------------
-
-    query_embedding = model.encode([query])
+    query_embedding = embedding_model.encode([query])
     query_embedding = np.array(query_embedding).astype("float32")
 
     _, faiss_indices = index.search(query_embedding, k=5)
 
-    # ---------------- BM25 ----------------
+    bm25_scores = bm25.get_scores(
+        query.lower().split()
+    )
 
-    scores = bm25.get_scores(tokenize(query))
-
-    bm25_indices = sorted(
-        range(len(scores)),
-        key=lambda i: scores[i],
-        reverse=True
-    )[:5]
-
-    # ---------------- Merge ----------------
+    bm25_indices = np.argsort(bm25_scores)[::-1][:5]
 
     merged_indices = []
 
     for i in faiss_indices[0]:
+
         if i not in merged_indices:
             merged_indices.append(i)
 
     for i in bm25_indices:
+
         if i not in merged_indices:
             merged_indices.append(i)
 
@@ -97,9 +91,21 @@ def main():
             }
         )
 
-    prompt = build_prompt(retrieved_chunks, query)
+    prompt = build_prompt(
+        retrieved_chunks,
+        query
+    )
 
     answer = generate_answer(prompt)
+
+    return answer, retrieved_metadata
+
+
+if __name__ == "__main__":
+
+    query = input("Enter your question: ")
+
+    answer, sources = search(query)
 
     print("\nAnswer\n")
     print(answer)
@@ -108,14 +114,13 @@ def main():
 
     seen = set()
 
-    for source in retrieved_metadata:
+    for source in sources:
 
-        citation = f"{source['paper_name']} | Chunk {source['chunk_id']}"
+        citation = (
+            f"{source['paper_name']} | "
+            f"Chunk {source['chunk_id']}"
+        )
 
         if citation not in seen:
             print(citation)
             seen.add(citation)
-
-
-if __name__ == "__main__":
-    main()
