@@ -49,12 +49,28 @@ def load_indexes():
 load_indexes()
 
 
-def search(query):
+def retrieve(query, selected_papers=[]):
 
     query_embedding = embedding_model.encode([query])
     query_embedding = np.array(query_embedding).astype("float32")
+    
+    filtered_indices = []
 
-    _, faiss_indices = index.search(query_embedding, k=5)
+    if len(selected_papers) == 0:
+
+        filtered_indices = list(range(len(chunks)))
+
+    else:
+
+        for i, chunk in enumerate(chunks):
+
+            if chunk["paper_name"] in selected_papers:
+
+                filtered_indices.append(i)
+
+    k = min(20, index.ntotal)
+
+    _, faiss_indices = index.search(query_embedding, k=k)
 
     bm25_scores = bm25.get_scores(
         query.lower().split()
@@ -66,10 +82,16 @@ def search(query):
 
     for i in faiss_indices[0]:
 
+        if i not in filtered_indices:
+            continue
+
         if i not in merged_indices:
             merged_indices.append(i)
-
+            
     for i in bm25_indices:
+
+        if i not in filtered_indices:
+            continue
 
         if i not in merged_indices:
             merged_indices.append(i)
@@ -108,13 +130,6 @@ def search(query):
             }
         )
 
-    prompt = build_prompt(
-        retrieved_chunks,
-        query
-    )
-
-    answer = generate_answer(prompt)
-
     unique_sources = []
     seen = set()
 
@@ -130,8 +145,24 @@ def search(query):
             seen.add(key)
             unique_sources.append(source)
 
-    return answer, unique_sources
+    return retrieved_chunks, unique_sources
 
+
+def search(query, selected_papers=[]):
+
+    retrieved_chunks, retrieved_metadata = retrieve(
+        query,
+        selected_papers
+    )
+
+    prompt = build_prompt(
+        retrieved_chunks,
+        query
+    )
+
+    answer = generate_answer(prompt)
+
+    return answer, retrieved_metadata
 
 if __name__ == "__main__":
 
